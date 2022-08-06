@@ -28,7 +28,7 @@ h1 {
 #results {
   padding:.6em;
   margin: 1em auto;
-  margin-top:0;
+  margin-top:-2.5em;
   border-top: 3px solid orange;
   border-bottom: 3px solid orange;
   display:none;
@@ -69,7 +69,6 @@ ol {
   text-align: left;
   padding:.5em;
   margin:0;
-  margin-top:.5em;
 }
 
 ol li {
@@ -106,6 +105,18 @@ hr {
   opacity: 0;
   transition: opacity .3s ease-in;
   height:1em;
+}
+
+.reset {
+  padding:.75em;
+}
+
+#reset {
+  color:red;
+}
+
+div #reset:hover {
+  color:darkred;
 }
 
 #bottomLinkTextContainer {
