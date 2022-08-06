@@ -133,7 +133,7 @@ div #reset:hover {
 }
 
 #keepGoing:hover, #viewResults:hover,  #reset:hover {
-    color:orange;
+  color:orange;
 }
 
 .errMsg {

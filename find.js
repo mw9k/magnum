@@ -1,5 +1,6 @@
 let alreadySeen = [], winnerList = [], unfinished = false, loaded = false,
-		currentlyLooking = false, data = undefined, chosenTime = "";
+		currentlyLooking = false, data = undefined, chosenTime = "",
+		cancelled = false;
 
 
 function el(elem) {	// custom shortener for "document.getElementById()"
@@ -37,7 +38,8 @@ async function loadData() {
 	// load pre-baked JSON data containing last few generations of search.
 	// Like an endgame table to resolve the search; & cuts repetitive API fetches
 	let found = false;
-	data = await fetch("data.JSON")
+	data = await fetch("./data.json") // plan A
+	// data = await fetch("https://api.npoint.io/00a5297c5864c8e0f404")	// plan B
 	.then((res)=>{
 		if(res.ok) {
 			found = true;
@@ -53,6 +55,12 @@ document.addEventListener("click", function(e) {
 		if (!currentlyLooking) runSearch();
 	} else if (e.target.id == "viewResults") {
 		el('results').scrollIntoView({behavior:"smooth", block:"center"});
+	} else if (e.target.id == "reset") {
+		cancelled = true;
+		if (!currentlyLooking) {
+			clearSearch();
+			enableControls(true);
+		}
 	}
 });
 
@@ -89,21 +97,27 @@ async function runSearch() {
 	el("keepGoing").style.opacity = "0";
 	el("keepGoing").style.visibility = "hidden";
 	el("launchSearch").textContent = "Searching...";
-	el("launchSearch").disabled = true;
+	disableControls();
 	currentlyLooking = true;
 	unfinished = true;
 	for (let i = 0; i < 8; i++) {	// only look 8x, require manual intervention to
 		 														// look further. Prevents infinite loops etc
 		let winner = await findTopWin(winnerList[winnerList.length - 1], chosenTime);
+		if (cancelled) {
+			clearSearch();
+			enableControls(true);
+			return false;
+		}
 		if (winner == "MagnusCarlsen" || winner === false) {	// if search completed
 			unfinished = false;
-			el("launchSearch").disabled = false;
+			enableControls(true);
 			currentlyLooking = false;
-			el("launchSearch").textContent = "Search";
 			if (winner == "MagnusCarlsen") {	// if search SUCCESSFULLY completed
 				el("results").style.display = "table";
+				const plural1 = ( el("winChain").childNodes.length > 1 ) ? "s" : "";
+				const plural2 = ( el("winChain").childNodes.length > 1 ) ? "" : "s";
 				el("results").innerHTML = `Search complete. <b>${el("winChain").childNodes.length}
-				 ${chosenTime} wins</b> separate ${winnerList[0]} from MagnusCarlsen.`;
+				 ${chosenTime} win${plural1}</b> separate${plural2} ${winnerList[0]} from MagnusCarlsen.`;
 				 el("viewResults").style.visibility = "visible";
 				 el("viewResults").style.opacity = "1";
 			}
@@ -115,7 +129,7 @@ async function runSearch() {
 	el("launchSearch").textContent = "Keep Going";
 	el("keepGoing").style.visibility = "visible";
 	el("keepGoing").style.opacity = "1";
-	el("launchSearch").disabled = false;
+	enableControls();
 	currentlyLooking = false;
 }
 
@@ -140,7 +154,7 @@ async function validate(username="", msg="", valid=false) {
 		msg = `User "${username}" not found.`;
 		return {username:username, valid:false, msg:msg};
 	}
-	username = profile.url.match(/\w+$/g)[0];  // ensure correct capitalisation for URLs
+	username = profile.url.match(/[^/]*$/g)[0];  // ensure correct capitalisation for URLs
 	if (username == "MagnusCarlsen") {
 		msg = `ERROR: Cannot compute the Magnus number for GM Magnus Carlsen.<br>Please choose literally anyone else ;-)`;
 		return {username:username, valid:false, msg:msg};
@@ -150,6 +164,7 @@ async function validate(username="", msg="", valid=false) {
 
 
 async function findTopWin(user,  timeClass) {			// the heavy lifting; find each user's "best" win.
+	if (cancelled) return false;	// multiple points of cancellation
 	const myStats = await fetch(`https://api.chess.com/pub/player/${user}/stats`)
 	.then(myStats => myStats.json());
 	if ((!myStats[`chess_${ timeClass}`]) || myStats[`chess_${ timeClass}`].best === undefined) {
@@ -168,6 +183,7 @@ async function findTopWin(user,  timeClass) {			// the heavy lifting; find each 
 	const gamelist = await fetch(`https://api.chess.com/pub/player/${user}/games/${bestGameYear}/${bestGameMonth}`)
 	.then(gamelist => gamelist.json());
 
+	if (cancelled) return false;	// multiple points of cancellation
 	// check if user appears in pre-baked data of the first 1-3 gens of Magnus defeaters
 	let def = "";
 	for (let gen=1; gen < 6; gen++) {	// why 6? room for expansion
@@ -191,9 +207,9 @@ async function findTopWin(user,  timeClass) {			// the heavy lifting; find each 
 		}
 	}
 
+	if (cancelled) return false;	// multiple points of cancellation
 	let opponent = "", playingAs = "", topWin = 0, bestGameURL = "",
 			bestOpp = "", ratingAttained = 0;
-
 	// look for top rated opponent in best month (indirect; best I can do w/ API)
 	for (const game of gamelist.games) {
 		if (game.time_class !==  timeClass) continue;
@@ -213,7 +229,7 @@ async function findTopWin(user,  timeClass) {			// the heavy lifting; find each 
 	if (bestOpp == "") {  // if no best opponent was found, backtrack to a dif. user
 		return await backtrack(user);
 	}
-
+	if (cancelled) return false;	// multiple points of cancellation
 	alreadySeen.push( lCase(bestOpp) );
 	addEntry(bestGameURL, winDate, user, ratingAttained, bestOpp, topWin, timeClass);
 	return bestOpp;
@@ -251,6 +267,9 @@ function clearSearch() {
 	el("results").style.display = "none";
 	el("viewResults").style.visibility = "hidden";
 	el("viewResults").style.opacity = "0";
+	el("keepGoing").style.visibility = "hidden";
+	el("keepGoing").style.opacity = "0";
+	cancelled = false;
 	winnerList = [];
 	alreadySeen = [];
 	chosenTime = "";
@@ -274,4 +293,24 @@ function showLess() {
 	el("showLess").setAttribute("hidden", "true");
 	el("showMore").removeAttribute("hidden");
 	el("moreInfo").setAttribute("hidden", "true");
+}
+
+
+function enableControls(all) {
+	el("launchSearch").disabled = false;
+	if (!all) return;
+	el("launchSearch").textContent = "Search";
+	el("reset").style.visibility = "hidden";
+	el("reset").style.opacity = "0";
+	el("uName").disabled = false;
+	el("timeClass").disabled = false;
+}
+
+
+function disableControls() {
+	el("reset").style.visibility = "visible";
+	el("reset").style.opacity = "1";
+	el("launchSearch").disabled = true;
+	el("uName").disabled = true;
+	el("timeClass").disabled = true;
 }
