@@ -26,18 +26,12 @@ h1 {
 }
 
 #results {
-  /*color:white;*/
   padding:.6em;
   margin: 1em auto;
+  margin-top:0;
   border-top: 3px solid orange;
   border-bottom: 3px solid orange;
-  /*border: 4px solid orange;*/
-  /*background: #fddfbb;*/
-  /*background:#D46700;
-  border-bottom:2px #8E4C00 solid;
-  border-right:2px #8E4C00 solid;*/
   display:none;
-  /*border-radius: .5em;*/
 }
 
 #controls {
@@ -103,7 +97,7 @@ hr {
   margin: .5em 0;
 }
 
-#keepGoing, #viewResults {
+#keepGoing, #viewResults, #reset {
   text-decoration: underline;
   color:#D46700;
   font-weight: bold;
@@ -111,17 +105,24 @@ hr {
   visibility: hidden;
   opacity: 0;
   transition: opacity .3s ease-in;
+  height:1em;
 }
 
-#keepGoing:hover, #viewResults:hover {
+#bottomLinkTextContainer {
+  display: block;
+  position:relative;
+  height:1em;
+  margin-bottom:12em; /* to clear footer */
+}
+
+#keepGoing, #viewResults {
+  position:absolute;
+  top: 0;
+  width:100%;
+}
+
+#keepGoing:hover, #viewResults:hover,  #reset:hover {
     color:orange;
-}
-
-#clearance {
-  padding:0;
-  margin:0;
-  display:block;
-  margin-bottom: 7em; /* to clear footer */
 }
 
 .errMsg {
@@ -141,16 +142,16 @@ button {
   padding:.4em;
   cursor:pointer;
   /*font-weight: bold;*/
-  border: 1.5px #028634 solid;
+  border: 1.5px #1f7337 solid;
   border-radius: .6vh;
-  background: #03c04a;
+  background: #2DA44E;
   color:white;
   margin:1vh;
   font-size:16px;
 }
 
 button:hover {
-  background: #1cc65c;
+  background: #24833e;
 }
 
 button:disabled {
@@ -183,7 +184,7 @@ footer li {
   margin-bottom: .3em;
 }
 
-#container {
+#footerContainer {
   padding: 0 3em 3em 0;
 }
 
