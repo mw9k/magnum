@@ -1,4 +1,4 @@
-# magnum
+# MagNum
 A website to find a chess.com user's 'Magnus Number', using the Chess.com public API.
 
 Live at https://mw9k.github.io/magnum/
