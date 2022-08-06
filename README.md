@@ -18,7 +18,7 @@ several Mb too much data per search (whole month of games).
 Hoping to think of an alternative, more efficient method.
 
 ## Current Algorithm Lacks Discernment...
-Essentially it works by finding the best rated 
+Essentially it works by finding the (approximately) best rated 
 opponent that each user defeated, then 
 following that chain upwards until it finds 
 someone in a hard-coded tree containing the 
