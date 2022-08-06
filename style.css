@@ -1,0 +1,199 @@
+
+body {
+  cursor: progress;
+  background:white;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size:1.075em;
+  text-align: center;
+  min-height:100vh;
+  padding: 0;
+  margin:0;
+  position:absolute;
+  top:0;
+  width: 100%;
+}
+
+h1 {
+  color:#02042f;
+  letter-spacing: -.75px;
+  font-size: 1.75em;
+  padding: .3em;
+  margin:0;
+}
+
+#loadingCover {
+  color: dimgray;
+}
+
+#results {
+  /*color:white;*/
+  padding:.6em;
+  margin: 1em auto;
+  border-top: 3px solid orange;
+  border-bottom: 3px solid orange;
+  /*border: 4px solid orange;*/
+  /*background: #fddfbb;*/
+  /*background:#D46700;
+  border-bottom:2px #8E4C00 solid;
+  border-right:2px #8E4C00 solid;*/
+  display:none;
+  /*border-radius: .5em;*/
+}
+
+#controls {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s ease-in;
+  margin:0;
+  margin-bottom: .25em;
+  padding:.3em;
+}
+
+.loading {
+  animation: loadingAnim 1.1s infinite;
+  animation-timing-function: ease;
+  font-size: 1.75em;
+  line-height: .5em;
+}
+
+@keyframes loadingAnim {
+  0%   {letter-spacing: 0}
+  50% {letter-spacing: .3em;}
+  100%   {letter-spacing: 0;}
+}
+
+ul {
+  list-style-position: inside;
+  text-align: left;
+  width:60%;
+  margin: auto;
+}
+
+ol {
+  max-width: 80%;
+  display:inline-block;
+  text-align: left;
+  padding:.5em;
+  margin:0;
+  margin-top:.5em;
+}
+
+ol li {
+  color: #E77200;
+  font-weight: bold;
+  padding:.75em;
+  background:#D9EDF7;
+  margin-bottom: 6px;
+  border: 1px #aebec6 solid;
+}
+
+ol li span {
+  color: black;
+  font-weight: normal;
+}
+
+ol li span.tc {
+  margin-right: .25em;
+  color:gray;
+  font-weight: bold;
+  display:none;
+}
+
+hr {
+  margin: .5em 0;
+}
+
+#keepGoing, #viewResults {
+  text-decoration: underline;
+  color:#D46700;
+  font-weight: bold;
+  cursor:pointer;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s ease-in;
+}
+
+#keepGoing:hover, #viewResults:hover {
+    color:orange;
+}
+
+#clearance {
+  padding:0;
+  margin:0;
+  display:block;
+  margin-bottom: 7em; /* to clear footer */
+}
+
+.errMsg {
+  color:darkred;
+  display: block;
+  text-align: center;
+}
+
+.errMsg::first-letter {
+  font-size: 1.5em;
+  color:red;
+  margin-right: .25em;
+}
+
+button {
+  display:inline-block;
+  padding:.4em;
+  cursor:pointer;
+  /*font-weight: bold;*/
+  border: 1.5px mediumseagreen solid;
+  border-radius: .6vh;
+  background: palegreen;
+  margin:1vh;
+}
+
+button:hover {
+  background: springgreen;
+}
+
+button:disabled {
+  background: lightgray;
+  color: gray;
+}
+
+input, select {
+  padding:.4em;
+  margin-right: .75em;
+}
+
+label {
+  color:#282828;
+}
+
+footer {
+  position: absolute;
+  padding:1em 0 0 0;
+  width:100%;
+  bottom:0;
+  margin:0;
+  background-color: black;
+  color:gainsboro;
+  line-height: 120%;
+}
+
+footer li {
+  margin-bottom: .3em;
+}
+
+#signature {
+  color:darkslategray;
+  position: absolute;
+  bottom:0;
+  left:0;
+  padding: 1em;
+}
+
+footer a {
+  color:SlateBlue;
+}
+
+footer span {
+  color: cornflowerblue;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="M.G.W.">
+  <meta name="keywords" content="Chess, Magnus, chess.com">
+  <meta name="description" content="Attempts to find the Magnus Number for any given chess.com user - a chain of victories by which they have 'defeated' Magnus Carlsen, the world's best chess player.">
+  <title>M_Number Finder v1.0</title>
+  <script src="find.js"></script>
+  <!-- <script src="acquirer.js"></script> -->
+  <link rel="stylesheet" href="style.css?v=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Magnus Number Finder</h1>
+  <p id=loadingCover>Loading Data<br><span class=loading>...</span></p>
+  <div id=controls >
+    <label for="timeClass">Time Control:</label>
+    <select name="timeClass" id="timeClass">
+      <option value="rapid">Rapid</option>
+      <option value="blitz" selected>Blitz</option>
+      <option value="bullet">Bullet</option>
+    </select>
+    &nbsp;
+    <label for="uName">Chess.com Username:</label>
+    <input type="text" id="uName" name="uName">
+    <button type="button" id="launchSearch">Start Search</button>
+  </div>
+  <div id=results></div>
+  <ol reversed id=winChain ></ol>
+  <div id=keepGoing title="Click here or press Enter to continue the search.">Continue Looking...</div>
+  <div id=viewResults>View Results &#9650;</div>
+  <div id=clearance>&nbsp;</div>
+  <footer>
+    <p>Trace your path of victories to the world's best chess player.
+      <p><span id=showMore onclick="showMore();">More Info &#8963;</span>
+      <div id=moreInfo hidden>
+        <ul>
+          <li>Unofficial hobby project; not associated with Chess.com.
+          <li>Attempts to find any Chess.com user's 'Magnus Number' - a chain of victories that leads to GM Magnus Carlsen.
+              Even low rated players may find that they have 'defeated' Magnus in this way.
+          <li>Not necessarily shortest path. Therefore, might not find your <em>true</em> Magnus number. For now, I have used some indirect workarounds to avoid overwhelming chess.com's public API.
+          <li>Work in progress. Dead ends may occur, despite best efforts to backtrack / avoid loops.
+          <li>Requires a modern browser.
+          <li>This site respects your privacy - no tracking or other cookies used.
+          <li>Feedback & Bug reports: contact <a href="https://www.reddit.com/user/devAccount321">https://www.reddit.com/user/devAccount321</a>
+        </ul>
+      </div>
+      <p><span id=showLess onclick="showLess();" hidden>Hide Info &#8964;</span>
+    <small id=signature>
+      <p><em>By MGW, August 2022.</em>
+    </small>
+</footer>
+</body>
+</html>
