@@ -37,7 +37,7 @@ async function loadData() {
 	// load pre-baked JSON data containing last few generations of search.
 	// Like an endgame table to resolve the search; & cuts repetitive API fetches
 	let found = false;
-	data = await fetch("data.JSON")
+	data = await fetch("./data.json")
 	.then((res)=>{
 		if(res.ok) {
 			found = true;
