@@ -65,7 +65,7 @@ h1 {
 ul {
   list-style-position: inside;
   text-align: left;
-  width:60%;
+  max-width:120vh;
   margin: auto;
 }
 
@@ -178,6 +178,10 @@ footer {
 
 footer li {
   margin-bottom: .3em;
+}
+
+#container {
+  padding: 0 3em 3em 0;
 }
 
 #signature {
