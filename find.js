@@ -17,7 +17,7 @@ window.addEventListener('load', (event) => {
 	loadData();
 	const interval = setInterval(function() {
 		if (data == "error") {
-			errMsg("Failed to load necessary data. Try refreshing the page.");
+			displayError("Failed to load necessary data. Try refreshing the page.");
 			el("loadingCover").setAttribute("hidden",true);
 			document.body.style.cursor = "default";
 			clearInterval(interval);
@@ -37,7 +37,7 @@ async function loadData() {
 	// load pre-baked JSON data containing last few generations of search.
 	// Like an endgame table to resolve the search; & cuts repetitive API fetches
 	let found = false;
-	data = await fetch("/data.JSON")
+	data = await fetch("data.JSON")
 	.then((res)=>{
 		if(res.ok) {
 			found = true;
