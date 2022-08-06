@@ -10,7 +10,7 @@ body {
   position:absolute;
   top:0;
   width: 100%;
-  font-size:calc(12px + 1vh);
+  font-size:18px;
 }
 
 h1 {
@@ -65,12 +65,12 @@ h1 {
 ul {
   list-style-position: inside;
   text-align: left;
-  max-width:120vh;
+  max-width:80%;
   margin: auto;
 }
 
 ol {
-  max-width: 80%;
+  max-width: 80vw;
   display:inline-block;
   text-align: left;
   padding:.5em;
@@ -141,14 +141,16 @@ button {
   padding:.4em;
   cursor:pointer;
   /*font-weight: bold;*/
-  border: 1.5px mediumseagreen solid;
+  border: 1.5px #028634 solid;
   border-radius: .6vh;
-  background: palegreen;
+  background: #03c04a;
+  color:white;
   margin:1vh;
+  font-size:16px;
 }
 
 button:hover {
-  background: springgreen;
+  background: #1cc65c;
 }
 
 button:disabled {
@@ -159,6 +161,7 @@ button:disabled {
 input, select {
   padding:.4em;
   margin-right: .75em;
+  font-size:16px;
 }
 
 label {
