@@ -154,7 +154,7 @@ async function validate(username="", msg="", valid=false) {
 		msg = `User "${username}" not found.`;
 		return {username:username, valid:false, msg:msg};
 	}
-	username = profile.url.match(/\w+$/g)[0];  // ensure correct capitalisation for URLs
+	username = profile.url.match(/[^/]*$/g)[0];  // ensure correct capitalisation for URLs
 	if (username == "MagnusCarlsen") {
 		msg = `ERROR: Cannot compute the Magnus number for GM Magnus Carlsen.<br>Please choose literally anyone else ;-)`;
 		return {username:username, valid:false, msg:msg};
