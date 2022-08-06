@@ -37,7 +37,7 @@ async function loadData() {
 	// load pre-baked JSON data containing last few generations of search.
 	// Like an endgame table to resolve the search; & cuts repetitive API fetches
 	let found = false;
-	data = await fetch("./data.JSON")
+	data = await fetch(`https://api.npoint.io/00a5297c5864c8e0f404`)
 	.then((res)=>{
 		if(res.ok) {
 			found = true;

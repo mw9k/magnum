@@ -1,4 +1,3 @@
-
 body {
   cursor: progress;
   background:white;
@@ -11,6 +10,7 @@ body {
   position:absolute;
   top:0;
   width: 100%;
+  font-size:calc(12px + 1vh);
 }
 
 h1 {
