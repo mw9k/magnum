@@ -1,5 +1,6 @@
 # magnum
 A website to find a chess.com user's 'Magnus Number', using the Chess.com public API.
+Live at https://mw9k.github.io/magnum/
 
 - Unofficial hobby project; not associated with Chess.com.
 - Attempts to find any Chess.com user's 'Magnus Number' - a chain of victories that leads to GM Magnus Carlsen.
