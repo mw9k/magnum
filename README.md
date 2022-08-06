@@ -10,3 +10,9 @@ Live at https://mw9k.github.io/magnum/
   For now, I have used some indirect workarounds to avoid overwhelming chess.com's public API.
 - Work in progress. Dead ends may occur, despite best efforts to backtrack / avoid loops.
 - Requires a modern browser.
+
+## Problem / to-fix:
+No way to directly fetch a user's best game via Chess.com public API, therefore downloads 
+several Mb too much data per search (whole month of games). 
+
+Hoping to think of an alternative, more efficient method.
