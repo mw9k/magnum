@@ -38,7 +38,7 @@ async function loadData() {
 	// load pre-baked JSON data containing last few generations of search.
 	// Like an endgame table to resolve the search; & cuts repetitive API fetches
 	let found = false;
-	data = await fetch("./data.json")
+	data = await fetch("./data.json") // plan A
 	// data = await fetch("https://api.npoint.io/00a5297c5864c8e0f404")	// plan B
 	.then((res)=>{
 		if(res.ok) {
@@ -114,8 +114,10 @@ async function runSearch() {
 			currentlyLooking = false;
 			if (winner == "MagnusCarlsen") {	// if search SUCCESSFULLY completed
 				el("results").style.display = "table";
+				const plural1 = ( el("winChain").childNodes.length > 1 ) ? "s" : "";
+				const plural2 = ( el("winChain").childNodes.length > 1 ) ? "" : "s";
 				el("results").innerHTML = `Search complete. <b>${el("winChain").childNodes.length}
-				 ${chosenTime} wins</b> separate ${winnerList[0]} from MagnusCarlsen.`;
+				 ${chosenTime} win${plural1}</b> separate${plural2} ${winnerList[0]} from MagnusCarlsen.`;
 				 el("viewResults").style.visibility = "visible";
 				 el("viewResults").style.opacity = "1";
 			}
