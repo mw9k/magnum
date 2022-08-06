@@ -165,6 +165,14 @@ input, select {
   font-size:16px;
 }
 
+.noWrap {
+  white-space:nowrap;
+}
+
+#uName {
+    width:8em;
+}
+
 label {
   color:#282828;
 }
@@ -177,7 +185,7 @@ footer {
   margin:0;
   background-color: black;
   color:gainsboro;
-  line-height: 120%;
+  line-height: 130%;
 }
 
 footer li {

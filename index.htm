@@ -20,6 +20,7 @@
   <h1>MagNum</h1>
   <p id=loadingCover>Loading Data<br><span class=loading>...</span></p>
   <div id=controls >
+    <span class=noWrap>
     <label for="timeClass">Time Control:</label>
     <select name="timeClass" id="timeClass">
       <option value="rapid">Rapid</option>
@@ -27,8 +28,11 @@
       <option value="bullet">Bullet</option>
     </select>
     &nbsp;
+    </span>
+    <span class=noWrap>
     <label for="uName">Chess.com Username:</label>
     <input type="text" id="uName" name="uName">
+    </span>
     <button type="button" id="launchSearch">Start Search</button>
     <div><small id=reset>Cancel Search (Reset)</small></div>
   </div>
@@ -40,7 +44,7 @@
   </div>
   <footer>
     <div id=footerContainer>
-    <p>Find your Magnus Number: a chain of victories leading to the world's best chess player.
+    <p>Find your Magnus Number: a chain of victories leading to the world's top player.
       <p><span id=showMore onclick="showMore();">More Info &#8963;</span>
       <div id=moreInfo hidden>
         <ul>
