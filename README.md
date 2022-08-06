@@ -11,8 +11,21 @@ Live at https://mw9k.github.io/magnum/
 - Work in progress. Dead ends may occur, despite best efforts to backtrack / avoid loops.
 - Requires a modern browser.
 
-## Problem / to-fix:
+## Problem / To-fix:
 No way to directly fetch a user's best game via Chess.com public API, therefore downloads 
 several Mb too much data per search (whole month of games). 
 
 Hoping to think of an alternative, more efficient method.
+
+## Current Algorithm Lacks Discernment...
+Essentially it works by finding the best rated 
+opponent that each user defeated, then 
+following that chain upwards until it finds 
+someone in a hard-coded tree containing the 
+last 2-3 generations of direct Magnus defeaters.
+
+This approach arises from limitations of
+the API, but it is often not shortest path.
+I plan to update the algorithm soon to at least
+consider some alternatives, and to
+prefer more promising paths.
