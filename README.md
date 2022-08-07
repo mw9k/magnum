@@ -11,12 +11,6 @@ Live at https://mw9k.github.io/magnum/
 - Work in progress. Dead ends may occur, despite best efforts to backtrack / avoid loops.
 - Requires a modern browser.
 
-## Problem / To-fix:
-No way to directly fetch a user's best game via Chess.com public API, therefore downloads 
-several Mb too much data per search (whole month of games). 
-
-Hoping to think of an alternative, more efficient method.
-
 ## Current Algorithm Lacks Discernment...
 Essentially it works by finding the (approximately) best rated 
 opponent that each user defeated, then 
@@ -31,7 +25,8 @@ consider some alternatives, and to
 prefer more promising paths.
 
 ## Not Open Source (yet)
-I am not adding an open source licence just yet, until I improve the search algorithm somewhat. I'd just like to get it to a
+I am not adding an open source licence just yet, until 
+I improve the search algorithm somewhat. I'd just like to get it to a
 reasonable level before opening it up. Of course, all the source code is inspectable.
 
 ## Acknowledgements:
