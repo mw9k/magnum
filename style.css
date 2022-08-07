@@ -55,15 +55,6 @@ h1 {
   100%   {letter-spacing: 0;}
 }
 
-ul {
-  list-style-position: inside;
-  text-align: left;
-  width:80%;
-  max-width:50em;
-  margin: auto;
-  padding:0;
-}
-
 ol {
   max-width: 80vw;
   display:inline-block;
@@ -200,6 +191,21 @@ footer {
   line-height: 130%;
 }
 
+footer ul {
+  list-style-position: inside;
+  text-align: left;
+  padding:0;
+}
+
+footer ul, footer p {
+  margin: auto;
+  width: 80%;
+  max-width: 50em;
+}
+
+footer p {
+  margin-bottom: 1em;
+}
 
 footer li {
   margin-bottom: .3em;
@@ -210,7 +216,10 @@ footer li {
   position: absolute;
   bottom:0;
   left:0;
-  padding: 1em;
+  font-size:.75em;
+  padding: .2em;
+  white-space:nowrap;
+  margin:0;
 }
 
 header {
@@ -223,10 +232,12 @@ header {
 
 footer a {
   color:SlateBlue;
+  word-break: break-word;
 }
 
 footer span {
   color: cornflowerblue;
   text-decoration: underline;
   cursor: pointer;
+  line-height: 2em;
 }
