@@ -79,7 +79,7 @@ async function runSearch() {
 	if (!winnerList.length) {	// initiate search if not already initiated
 		let validated = await validate([el("uName").value]);
 		if (!validated.valid) {
-			displayError(validated.msg);
+			displayError(validated.msg, el("timeClass").value);
 			currentlyLooking = false;
 			return false;
 		} else {
@@ -277,10 +277,12 @@ function clearSearch() {
 }
 
 
-function displayError(msg) {
+function displayError(msg, chosenTime="") {
 	el("winChain").innerHTML = `<span class=errMsg>&#9888;${msg}</span>`;
 	if (msg == "MagnusCarlsen") {
 		el("winChain").innerHTML = `<ol start=0><li><span>MagnusCarlsen <em>is</em> MagnusCarlsen.</span></li></ol>`;
+		el("results").style.display = "table";
+		el("results").innerHTML = `Search complete. <b>0 ${chosenTime} wins</b> separate MagnusCarlsen from MagnusCarlsen.`;
 	}
 }
 
