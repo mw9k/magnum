@@ -280,7 +280,7 @@ function clearSearch() {
 function displayError(msg, chosenTime="") {
 	el("winChain").innerHTML = `<span class=errMsg>&#9888;${msg}</span>`;
 	if (msg == "MagnusCarlsen") {
-		el("winChain").innerHTML = `<ol start=0><li><span>MagnusCarlsen <em>is</em> MagnusCarlsen.</span></li></ol>`;
+		el("winChain").innerHTML = `<ol start=0><li><span>MagnusCarlsen is MagnusCarlsen.</span></li></ol>`;
 		el("results").style.display = "table";
 		el("results").innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search complete.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 	}
