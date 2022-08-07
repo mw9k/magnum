@@ -164,16 +164,17 @@ async function validate(username="", msg="", valid=false) {
 
 
 async function findTopWin(user,  timeClass) {			// the heavy lifting; find each user's "best" win.
-	if (cancelled) return false;	// multiple points of cancellation
 	const myStats = await fetch(`https://api.chess.com/pub/player/${user}/stats`)
 	.then(myStats => myStats.json());
 	if ((!myStats[`chess_${ timeClass}`]) || myStats[`chess_${ timeClass}`].best === undefined) {
 		// sometimes can be missing stats on chess.com end for users who DO have stats, unsure why...
-		let result = await backtrack(user);
+		const result = await backtrack(user, timeClass);
 		if (result === false) return false;
 		return;
 	}
-	// find the month in which user attained best rating for time class
+
+	if (cancelled) return false;	// (multiple points of cancellation)
+	// Find the month in which user attained best rating for time class...
 	let best = myStats[`chess_${ timeClass}`].best;
 	let gameURL = "";
 	let bestGameDate = new Date(best.date * 1000);
@@ -183,8 +184,8 @@ async function findTopWin(user,  timeClass) {			// the heavy lifting; find each 
 	const gamelist = await fetch(`https://api.chess.com/pub/player/${user}/games/${bestGameYear}/${bestGameMonth}`)
 	.then(gamelist => gamelist.json());
 
-	if (cancelled) return false;	// multiple points of cancellation
-	// check if user appears in pre-baked data of the first 1-3 gens of Magnus defeaters
+	if (cancelled) return false;	// (multiple points of cancellation)
+	// Check if user appears in pre-baked data of the first 1-3 gens of Magnus defeaters...
 	let def = "";
 	for (let gen=1; gen < 6; gen++) {	// why 6? room for expansion
 		const defeaters = data[`${timeClass}DefeatersGen${gen}`];
@@ -207,7 +208,7 @@ async function findTopWin(user,  timeClass) {			// the heavy lifting; find each 
 		}
 	}
 
-	if (cancelled) return false;	// multiple points of cancellation
+	if (cancelled) return false;	// (multiple points of cancellation)
 	let opponent = "", playingAs = "", topWin = 0, bestGameURL = "",
 			bestOpp = "", ratingAttained = 0;
 	// look for top rated opponent in best month (indirect; best I can do w/ API)
@@ -227,17 +228,22 @@ async function findTopWin(user,  timeClass) {			// the heavy lifting; find each 
 	}
 
 	if (bestOpp == "") {  // if no best opponent was found, backtrack to a dif. user
-		return await backtrack(user);
+		return await backtrack(user, timeClass);
 	}
-	if (cancelled) return false;	// multiple points of cancellation
+	if (cancelled) return false;	// (multiple points of cancellation)
 	alreadySeen.push( lCase(bestOpp) );
 	addEntry(bestGameURL, winDate, user, ratingAttained, bestOpp, topWin, timeClass);
 	return bestOpp;
 }
 
-async function backtrack(user) {		// prune a 'dead-end' user from the search
+async function backtrack(user, timeClass="selected") {		// prune a 'dead-end' user from the search
+	timeClass = timeClass[0].toUpperCase() + timeClass.slice(1);
 	if (winnerList.length == 1 || !winnerList.length) {
-		displayError(`${user} has no recorded wins in selected time class.`);
+		if(alreadySeen.length > 1) {
+			displayError(`Could not complete search for ${user} in time class ${timeClass}.`);
+		} else {
+			displayError(`${user} has no recorded ${timeClass} wins.`);
+		}
 		return false;
 	}
 	let matches = el("winChain").innerHTML.match(/<li>.*?<\/li>/sg);
