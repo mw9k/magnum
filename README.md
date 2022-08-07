@@ -30,7 +30,10 @@ I plan to update the algorithm soon to at least
 consider some alternatives, and to
 prefer more promising paths.
 
+## Not Open Source (yet)
+I am not adding an open source licence just yet, until I improve the search algorithm somewhat. I'd just like to get it to a
+reasonable level before opening it up. Of course, all the source code is inspectable.
+
 ## Acknowledgements:
 - Favicon ["rooklab-brand-color"](https://www.favicon.cc/?action=icon&file_id=639359) found at favicon.cc, created by user sabrewolf.
   License: Creative Commons, no attribution
-
