@@ -156,7 +156,7 @@ async function validate(username="", msg="", valid=false) {
 	}
 	username = profile.url.match(/[^/]*$/g)[0];  // ensure correct capitalisation for URLs
 	if (username == "MagnusCarlsen") {
-		msg = `ERROR: Cannot compute the Magnus number for GM Magnus Carlsen.<br>Please choose literally anyone else ;-)`;
+		msg = `MagnusCarlsen`;
 		return {username:username, valid:false, msg:msg};
 	}
 	return {username:username, valid:true, msg:undefined};
@@ -279,6 +279,9 @@ function clearSearch() {
 
 function displayError(msg) {
 	el("winChain").innerHTML = `<span class=errMsg>&#9888;${msg}</span>`;
+	if (msg == "MagnusCarlsen") {
+		el("winChain").innerHTML = `<ol start=0><li><span>MagnusCarlsen <em>is</em> MagnusCarlsen.</span></li></ol>`;
+	}
 }
 
 
