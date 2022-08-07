@@ -216,6 +216,13 @@ footer li {
   padding: 1em;
 }
 
+header {
+    background: #E61B23;
+    border-bottom: darkred solid 1px;
+    color: whitesmoke;
+    padding: .25em;
+}
+
 footer a {
   color:SlateBlue;
 }
