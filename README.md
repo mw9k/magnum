@@ -29,3 +29,8 @@ the API, but it is often not shortest path.
 I plan to update the algorithm soon to at least
 consider some alternatives, and to
 prefer more promising paths.
+
+## Acknowledgements:
+- Favicon ["rooklab-brand-color"](https://www.favicon.cc/?action=icon&file_id=639359) found at favicon.cc, created by user sabrewolf.
+  License: Creative Commons, no attribution
+
