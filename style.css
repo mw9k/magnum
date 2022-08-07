@@ -2,7 +2,6 @@ body {
   cursor: progress;
   background:white;
   font-family: 'Nunito Sans', sans-serif;
-  font-size:1.075em;
   text-align: center;
   min-height:100vh;
   padding: 0;
@@ -10,7 +9,7 @@ body {
   position:absolute;
   top:0;
   width: 100%;
-  font-size:18px;
+  font-size:1.125em;
 }
 
 h1 {
@@ -59,8 +58,10 @@ h1 {
 ul {
   list-style-position: inside;
   text-align: left;
-  max-width:80%;
+  width:80%;
+  max-width:50em;
   margin: auto;
+  padding:0;
 }
 
 ol {
@@ -152,7 +153,6 @@ button {
   display:inline-block;
   padding:.4em;
   cursor:pointer;
-  /*font-weight: bold;*/
   border: 1.5px #1f7337 solid;
   border-radius: .6vh;
   background: #2DA44E;
@@ -200,12 +200,9 @@ footer {
   line-height: 130%;
 }
 
+
 footer li {
   margin-bottom: .3em;
-}
-
-#footerContainer {
-  padding: 0 3em 3em 0;
 }
 
 #signature {
@@ -220,7 +217,8 @@ header {
     background: #E61B23;
     border-bottom: darkred solid 1px;
     color: whitesmoke;
-    padding: .25em;
+    padding: .3em;
+    margin-bottom: .25em;
 }
 
 footer a {

@@ -282,7 +282,7 @@ function displayError(msg, chosenTime="") {
 	if (msg == "MagnusCarlsen") {
 		el("winChain").innerHTML = `<ol start=0><li><span>MagnusCarlsen <em>is</em> MagnusCarlsen.</span></li></ol>`;
 		el("results").style.display = "table";
-		el("results").innerHTML = `Search complete. <b>0 ${chosenTime} wins</b> separate MagnusCarlsen from MagnusCarlsen.`;
+		el("results").innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search complete.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 	}
 }
 
