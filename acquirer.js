@@ -10,75 +10,94 @@
 
 document.addEventListener("click", function(e) {
   if (e.target.id == "launchSearch") {
-    // runSearch();
-    // firstGenScrape("blitz");
-    // blankScrape("rapid", 3);
     // localStorage.clear();
-    scrapeLosses(el("uName").value, "rapid", "rapidDefeatersGen3");
+    scrapeGen("blitz", 2);
   }
 });
 
+
+async function scrapeGen(timeClass, generation) {
+  makeTextArea();
+  if (generation == 1) {
+    firstGenScrape(timeClass);
+    return;
+  }
+
+  let alreadySeen = []; // prevent repeating users in later generations
+  for (let i = generation - 1; i > 0; i--) {
+    let users = data[`${timeClass}DefeatersGen${i}`];
+    for (let u in users) {
+      alreadySeen.push(u);
+    }
+  }
+
+  const objName = `${timeClass}DefeatersGen${generation}`;
+  if (!localStorage.data) localStorage.data = JSON.stringify({})
+  let localdata = JSON.parse(localStorage.data);
+
+  if (!localdata[objName]) {
+    let scraped = await blankScrape(timeClass, generation);
+    if (!Object.keys(scraped)) {
+      console.log("Error. Couldn't start next generation");
+    }
+    localdata[objName] = scraped;
+  }
+
+  if (!localdata[objName]) {
+    console.log("Error. Couldn't generate object. Try clearing localStorage, then retrying.");
+  } else {  // if blank obj already present, look to fill in one user at a time
+            // based on the textbox input.
+
+    if (!el("uName").value) {
+      let toScrape = findNextToScrape(localdata[objName]);
+      el("uName").value = toScrape.unscraped[0];
+    } else {
+      if (localdata[objName][el("uName").value]) {
+        let losses = await scrapeLosses(el("uName").value, timeClass, alreadySeen);
+        if (!losses.beatBy$.length) console.log("NO LOSSES; FIXME");
+        localdata[objName][el("uName").value] = losses;
+        localStorage.data = JSON.stringify(localdata);
+        el("txtA").value = `"${objName}": ${JSON.stringify(localdata[objName])}`;
+
+        let toScrape = findNextToScrape(localdata[objName]);
+        el("uName").value = toScrape.unscraped[0];
+        console.log(`${toScrape.unscraped.length} remaining to scrape (of ${toScrape.totalUsers} users).`);
+        console.log(toScrape.totalScraped + " losses found in total.");
+      } else {
+        el("txtA").value = "Username not found in data. Try clearing the textbox to get the next empty user.";
+      }
+
+    }
+  }
+}
+
+
+function findNextToScrape(obj) {
+  let unscraped = [], totalScraped = 0, totalUsers = 0;
+  for (let u in obj) {
+    totalUsers++;
+    if(Object.keys(obj[u]).length === 0) {
+      unscraped.push(u);
+    } else {
+      totalScraped += Object.keys(obj[u]).length - 1;
+    }
+  }
+  return {unscraped, totalScraped, totalUsers}
+}
+
+
 async function firstGenScrape(timeClass) {
-  // to kick off the tree
-  let magnus = { };
-  let scraped = await scrapeLosses("MagnusCarlsen",  timeClass, magnus, "magnus");
+  // no need to manually call; called by "scrapeGen()"
+  let scraped = await scrapeLosses("MagnusCarlsen",  timeClass);
+  delete scraped.beatBy$;   // the $ is to prevent a username called that.
   txtA.value = `"${timeClass}DefeatersGen1": ${JSON.stringify(scraped)}`;
 }
 
 
-async function blankScrape(timeClass, generation) {
-  //build a blank stringified object from previous gen's data, ready to be filled
-  let jsonObj = timeClass + "DefeatersGen" + (generation - 1);
-  if (data[jsonObj] === undefined) {
-    console.log("object not yet in data");
-    return;
-  }
-  makeTextArea();
-  let defs = [];
-  let obj = data[jsonObj];
-  if (generation == 2) {
-    for (const u in obj) {
-      if (u == "allDefeaters$") {
-        defs = obj[u];
-      }
-    }
-  } else {
-    for (const u in obj) {
-      if (!obj[u].allDefeaters$ || !obj[u].allDefeaters$.length) continue;
-      for (const d of obj[u].allDefeaters$) {
-        if (d != "MagnusCarlsen") defs.push(d);
-      }
-    }
-  }
-  console.log(generation, defs.length, defs);
-
-  let blanks = {};
-  for (let d of defs) {
-    blanks[d] = {}; // should auto-eliminate duplicates
-  }
-
-  el("txtA").value = `"${timeClass}DefeatersGen${generation}": ${JSON.stringify(blanks)}`;
-
-}
-
-
-async function scrapeLosses(user,  timeClass, objName) {
-  //objName: previously generated "blank" 2nd or 3rd gen obj in JSON
+async function scrapeLosses(user,  timeClass, exclusions=[]) {
   makeTextArea();
   let doneSfx = new Audio("err.wav");
   console.clear();
-
-  if (data[objName] === undefined) {
-    console.log("object not yet in data");
-    return;
-  }
-
-  if (!user) {  // go with "first" user if none supplied
-    for (const u in data[objName]) {
-      user = u;
-      break;
-    }
-  }
 
   const stats = await fetch(`https://api.chess.com/pub/player/${user}`)
   .then(stats => stats.json());
@@ -93,7 +112,8 @@ async function scrapeLosses(user,  timeClass, objName) {
 
   let lookYear = joinedYear;
   let lookMonth = joinedMonth;
-  let losses = {allDefeaters$:[]};
+  let losses = {beatBy$:[]};
+  let alreadyExcluded = [];
 
   do {
     const gamelist = await fetch(`https://api.chess.com/pub/player/${user}/games/${lookYear}/${lookMonth}`)
@@ -105,16 +125,22 @@ async function scrapeLosses(user,  timeClass, objName) {
         let opponent = (game.black.username == user) ? "white" : "black";
         let userColour = (opponent == "white") ? "black" : "white";
           if (game[opponent].result == "win") {
-            if (losses.allDefeaters$.includes(game[opponent].username)) continue;
+            if (losses.beatBy$.includes(game[opponent].username)) continue;
+            if (alreadyExcluded.includes(game[opponent].username)) continue;
+            if (exclusions.includes(game[opponent].username)) {
+              alreadyExcluded.push(game[opponent].username);
+              continue;
+            }
+            if (game.initial_setup !== "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") continue;
+            if (game.rules !== "chess") continue;
             let loss = {
-              url:game.url,
-              date:new Date(game.end_time*1000).toLocaleDateString(),
-              username: game[opponent].username,
+              url:game.url.match(/[^/]*$/g)[0],
+              date:game.end_time,
               rating:game[opponent].rating,
-              opponentRating:game[userColour].rating
+              oppRating:game[userColour].rating,
             }
             losses[game[opponent].username] = loss;
-            losses.allDefeaters$.push(game[opponent].username);
+            losses.beatBy$.push(game[opponent].username);
         }
       }
     }
@@ -126,33 +152,51 @@ async function scrapeLosses(user,  timeClass, objName) {
       lookYear++;
       lookMonth = "01";
     }
-  } while ( lookYear < nowYear || lookMonth <= nowMonth )
+  } while ( lookYear < nowYear || lookMonth <= nowMonth );
 
-  if(data[objName]) {
-    if (localStorage[objName]) data[objName] = JSON.parse(localStorage[objName]);
-    data[objName][user] = losses;
-    localStorage[objName] = JSON.stringify(data[objName]);
-
-    // list remaining users to be scraped
-    let users = [];
-    let totalScraped = 0;
-    for (let u in data[objName]) {
-      if(Object.keys(data[objName][u]).length === 0) {
-        users.push(u);
-      } else {
-        totalScraped += Object.keys(data[objName][u]).length - 1;
-      }
-    }
-    console.log(users);
-    el("winChain").innerHTML = "Next Up: " + users[0] + "<p>Just Done: " + user + "<p>Total Scraped:" + totalScraped + "<p>From Class: " +  timeClass + ", " + users.length + " users remaining to scrape for this object";
-    el("uName").value = users[0]
-    el("txtA").value = `"${objName}":  ${localStorage[objName]}`;
-  }
-
+  console.log(`${alreadyExcluded.length} users skipped; already seen in prev. gen`);
   console.log("done");
   doneSfx.play();
   return losses;
 }
+
+
+async function blankScrape(timeClass, generation) {
+  //build a blank stringified object from previous gen's data, ready to be filled
+  //no need to manually call, will be built if doesn't exist.
+
+  let jsonObj = timeClass + "DefeatersGen" + (generation - 1);
+  if (data[jsonObj] === undefined) {
+    console.log("prev. gen object not yet in JSON data");
+    return false;
+  }
+  makeTextArea();
+  let defs = [];
+  let obj = data[jsonObj];
+  if (generation == 2) {  // different procedure to read from 1st gen.
+    for (const u in obj) {
+      defs.push(u);
+    }
+  } else {
+    for (const u in obj) {
+      if (!obj[u].beatBy$ || !obj[u].beatBy$.length) continue;
+      for (const d of obj[u].beatBy$) {
+        if (d != "MagnusCarlsen") defs.push(d);
+      }
+    }
+  }
+  console.log("Gen" + generation, "  Size " + defs.length, defs);
+
+  let blanks = {};
+  for (let d of defs) {
+    blanks[d] = {}; // should auto-eliminate duplicates
+  }
+
+  return blanks;
+
+}
+
+
 
 
 async function makeTextArea() {
