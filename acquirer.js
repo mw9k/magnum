@@ -11,7 +11,8 @@
 document.addEventListener("click", function(e) {
   if (e.target.id == "launchSearch") {
     // localStorage.clear();
-    scrapeGen("blitz", 1);
+    scrapeGen("blitz", 3);
+    // after scraping each full gen (all 3 TCs), remember to upload the new JSON.
   }
 });
 
@@ -60,7 +61,9 @@ async function scrapeGen(timeClass, generation) {
     if (!el("uName").value) {
       let toScrape = findNextToScrape(localdata[objName]);
       if(toScrape.unscraped.length > 0) {
+        console.log("Reordered: " + toScrape.unscraped);
         el("uName").value = toScrape.unscraped[0];
+        return;
       } else {
         el("uName").value = toScrape.lastUser;
       }
@@ -115,7 +118,7 @@ async function scrapeGen(timeClass, generation) {
 function findNextToScrape(obj) {
   let unscraped = [], totalScraped = 0, totalUsers = 0, lastUser = "";
   for (let u in obj) {
-    lastUser = u;
+    lastUser = u; // if all already scraped, still offer a username to re-scrape
     totalUsers++;
     if(Object.keys(obj[u]).length === 0) {
       unscraped.push(u);
@@ -123,6 +126,22 @@ function findNextToScrape(obj) {
       totalScraped += Object.keys(obj[u]).length - 1;
     }
   }
+
+  // Order names by 3rd letter of username (min username length is 3); to vary
+  // the ancestry somewhat (esp. for big gens that only get partially scraped).
+  // Not a too-obvious pattern but should yield same names on a re-scrape
+  // so things won't change drastically.
+  // Why not Fisher Yates by random seed? Might vary too much if new names added.
+
+  unscraped.sort((a,b) => a.toLowerCase().charCodeAt(2) - b.toLowerCase().charCodeAt(2));
+  let grp1 = [], grp2 = []; // push non-letter chars to end of list...
+  for ( let [i, uName] of unscraped.entries() ) {
+    if (uName[2].toLowerCase() == uName[2].toUpperCase()) { // if 3rd char not a letter
+      grp2.push(uName);
+    } else grp1.push(uName);
+  }
+  unscraped = grp1.concat(grp2);
+
   return {unscraped, totalScraped, totalUsers, lastUser}
 }
 
