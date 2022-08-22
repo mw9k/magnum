@@ -1,17 +1,17 @@
-//--------------------------------------------------------------------------------
 // Scraping functions.
+//--------------------------------------------------------------------------------
 // Scraping for a locally hosted JSON tree of Magnus' losses,
-//    like an endgame table for the last few steps of the search.
+// like an endgame table for the last few steps of the search.
 // Cuts down on fetch requests to chess.com API.
 // For my internal use. Not completely automated nor obvious in how to use.
-// Leaving this stuff in incase anyone notices an error in how I collected the data,
-//    or in case its useful to anyone trying to achieve similar.
+// Leaving this stuff in incase anyone notices an error in how I collected the
+// data, or in case its useful to anyone trying to achieve similar.
 
 
 document.addEventListener("click", function(e) {
   if (e.target.id == "launchSearch") {
     // localStorage.clear();
-    scrapeGen("blitz", 3);
+    scrapeGen("rapid", 1);
     // after scraping each full gen (all 3 TCs), remember to upload the new JSON.
   }
 });
@@ -41,7 +41,7 @@ async function scrapeGen(timeClass, generation) {
   } else {  // if blank obj already present, look to fill in one user at a time
             // based on the textbox input.
 
-    let alreadySeen = []; // prevent repeating users from prev. generations
+    let alreadySeen = ["MagnusCarlsen"]; // prevent repeating users from prev. generations
     for (let i = generation - 1; i > 0; i--) {
       let users = data[`${timeClass}DefeatersGen${i}`];
       for (let u in users) {
@@ -59,9 +59,10 @@ async function scrapeGen(timeClass, generation) {
     }
 
     if (!el("uName").value) {
-      let toScrape = findNextToScrape(localdata[objName]);
+      let toScrape = await findNextToScrape(localdata[objName], timeClass, generation);
       if(toScrape.unscraped.length > 0) {
-        console.log("Reordered: " + toScrape.unscraped);
+        const first10 = toScrape.unscraped.slice(0, 10);
+        console.log("Reordered: " + first10 + "...");
         el("uName").value = toScrape.unscraped[0];
         return;
       } else {
@@ -82,7 +83,7 @@ async function scrapeGen(timeClass, generation) {
         localStorage.data = JSON.stringify(localdata);
         el("txtA").value = `"${objName}": ${JSON.stringify(localdata[objName])}`;
 
-        let toScrape = findNextToScrape(localdata[objName]);
+        let toScrape = await findNextToScrape(localdata[objName], timeClass, generation);
         if(toScrape.unscraped.length) {
           el("uName").value = toScrape.unscraped[0];
         } else {
@@ -115,7 +116,8 @@ async function scrapeGen(timeClass, generation) {
 }
 
 
-function findNextToScrape(obj) {
+async function findNextToScrape(obj, timeClass, generation) {
+  let localdata = JSON.parse(localStorage.data);
   let unscraped = [], totalScraped = 0, totalUsers = 0, lastUser = "";
   for (let u in obj) {
     lastUser = u; // if all already scraped, still offer a username to re-scrape
@@ -127,20 +129,21 @@ function findNextToScrape(obj) {
     }
   }
 
-  // Order names by 3rd letter of username (min username length is 3); to vary
-  // the ancestry somewhat (esp. for big gens that only get partially scraped).
-  // Not a too-obvious pattern but should yield same names on a re-scrape
-  // so things won't change drastically.
-  // Why not Fisher Yates by random seed? Might vary too much if new names added.
-
-  unscraped.sort((a,b) => a.toLowerCase().charCodeAt(2) - b.toLowerCase().charCodeAt(2));
-  let grp1 = [], grp2 = []; // push non-letter chars to end of list...
-  for ( let [i, uName] of unscraped.entries() ) {
-    if (uName[2].toLowerCase() == uName[2].toUpperCase()) { // if 3rd char not a letter
-      grp2.push(uName);
-    } else grp1.push(uName);
-  }
-  unscraped = grp1.concat(grp2);
+  // Order incoming names by their rating in the last generation.
+  // Varies ancestry for partially scraped gens,
+  // But shouldn't fluctuate wildly on a rescrape (Fisher-Yates shuffle would).
+  // Also goes w/ thesis that higher rating == closer to Magnus.
+  unscraped.sort(function(a, b){
+    let aRating = 0, bRating = 0;
+    const lookIn = data[`${timeClass}DefeatersGen${generation - 1}`];
+    for (let u in lookIn) {
+      for (let u2 in lookIn[u]) {
+        if (u2 == a) aRating = lookIn[u][u2].oppRating;
+        if (u2 == b) bRating = lookIn[u][u2].oppRating;
+      }
+    }
+    return bRating - aRating;
+  });
 
   return {unscraped, totalScraped, totalUsers, lastUser}
 }
@@ -194,6 +197,7 @@ async function scrapeLosses(user,  timeClass, exclusions=[], sizeLimit = false) 
             // exclude undesirable games...
             if (game.initial_setup !== "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") continue;
             if (game.rules !== "chess") continue;
+            if (!game.pgn) continue;
             let blackMoveCount = game.pgn.match(/[0-9](\.\.\.)/g);
             if (!blackMoveCount || blackMoveCount.length < 2) continue;
 
