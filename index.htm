@@ -7,61 +7,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="keywords" content="Chess, Magnus, chess.com">
   <meta name="description" content="Attempts to find the Magnus Number for any given chess.com user - a chain of victories by which they have 'defeated' Magnus Carlsen, the world's top chess player.">
-  <title>MagNum v1.0</title>
+  <title>MagNum v2.0</title>
   <script src="find.js"></script>
   <!-- <script src="acquirer.js"></script> -->
   <link rel="stylesheet" href="style.css?v=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&display=swap" rel="stylesheet">
+
+
 </head>
-<body>
-  <header>&#11049;&thinsp;Results are not yet optimal. Improvements coming soon&hellip;</header>
-  <h1>Magnus Number Finder</h1>
-  <p id=loadingCover>Loading Data<br><span class=loading>...</span></p>
-  <div id=controls >
-    <span class=noWrap>
-    <label for="timeClass">Time Control:</label>
-    <select name="timeClass" id="timeClass">
-      <option value="rapid">Rapid</option>
-      <option value="blitz" selected>Blitz</option>
-      <option value="bullet">Bullet</option>
-    </select>
-    &nbsp;
-    </span>
-    <span class=noWrap>
-    <label for="uName">Chess.com Username:</label>
-    <input type="text" id="uName" name="uName">
-    </span>
-    <button type="button" id="launchSearch">Start Search</button>
-    <div class=reset><small id=reset>Cancel Search (Reset)</small></div>
+<body class=unloaded>
+  <h1>Magnus Number Estimator</h1>
+
+  
+
+  <div id=centralColumn>
+    <p id=loadingCover>Loading Data<br><span class=loading>...</span></p>
+
+    <div id=controls>
+      <p>
+        <label for="uName">Chess.com Username:</label>
+        <input type="text" id="uName" name="uName">
+      </p>
+      <p>
+        <label for="timeClass">Time Control:</label>
+        <select name="timeClass" id="timeClass">
+          <option value="rapid">Rapid</option>
+          <option value="blitz" selected>Blitz</option>
+          <option value="bullet">Bullet</option>
+        </select>
+      </p>
+      <button type="button" id="launchSearch">Search</button>
+      <p id=reset class="actionText"><i class="fa fa-times-circle"></i><em>&nbsp;</em>Cancel (Reset)</p>
+      <button type="button" id="keepLooking">Keep Looking</button>
+      <p id=viewResults class="actionText big">View Results<em>&nbsp;</em><i class="fa fa-chevron-down"></i></p>
+    </div>
+
+    <ol reversed id=defeatsList></ol>
+    <div id=results></div>
+    <div id=bottomText>
+      <div id=keepLookingText class="actionText big" title="Click here or press Enter to continue the search.">Continue Looking...</div>
+      <div id=progressIndicator>
+        <div class=loadingSpin></div>
+        <p id=searchText>Searching&hellip;</p>
+      </div>
+    </div>
   </div>
-  <div id=results></div>
-  <ol reversed id=winChain ></ol>
-  <div id=bottomLinkTextContainer>
-    <div id=keepGoing title="Click here or press Enter to continue the search.">Continue Looking...</div>
-    <div id=viewResults>View Results &#9650;</div>
-  </div>
+
   <footer>
-    <p>Trace your path of victories to the world's top player.
-    <p><span id=showMore onclick="showMore();">More Info &#8963;</span>
-    <div id=moreInfo hidden>
-      <ul>
-        <li>Unofficial hobby project; not associated with Chess.com.
-        <li>Attempts to find any Chess.com user's 'Magnus Number' - a chain of victories that leads to GM Magnus Carlsen.
-            Even low rated players may find that they have 'defeated' Magnus in this way.
-        <li>Not necessarily shortest path. Therefore, might not find your <em>true</em> Magnus number. For now, I have used some indirect workarounds to avoid overwhelming chess.com's public API.
-        <li>Work in progress. Dead ends may occur, despite best efforts to backtrack / avoid loops.
-        <li>Requires a modern browser.
-        <li>This site respects your privacy - no tracking or other cookies used.
-        <li>Feedback &amp; Bug reports: contact <a href="https://www.reddit.com/user/devAccount321">https://www.reddit.com/user/devAccount321</a>
-      </ul>
-    </div>
-    <p><span id=showLess onclick="showLess();" hidden>Hide Info &#8964;</span>
-    <div id=signature>
-      <em>By MGW, 08/22.</em>
-    </div>
+
+    <ul id=moreInfo class="stateB">
+      <li>Unofficial personal project. Not associated with Chess.com.</li>
+      <li>Attempts to find any Chess.com user's Magnus Number - a chain of victories  
+        by which they "defeated" GM Magnus Carlsen. </li>
+      <li>Not necessarily shortest path. Your <em>true</em> Magnus number may be lower. 
+        This simple estimate is the best I can do with chess.com's public API.</li>
+      <li>Dead ends may occur, despite best efforts to backtrack / avoid loops.</li>
+      <li>Requires a modern browser.</li>
+      <li>This site respects your privacy - no tracking or other cookies used.</li>
+      <li>Feedback &amp; Bug reports: contact me on <a href="https://www.reddit.com/message/compose/?to=BigGuyForYou_">Reddit</a></li>
+    </ul>
+    <div id="bottomRow">
+      <p>
+        <span class="revealTrigger stateA" data-targetid="moreInfo">More Info<em>&nbsp;</em><i class="fa fa-chevron-circle-up"></i></span>
+        <span class="revealTrigger stateB" data-targetid="moreInfo">Hide Info<em>&nbsp;</em><i class="fa fa-chevron-circle-down"></i></span>
+      </p>
+      <p>Find your connection to the world's top player.</p>
+      <p>
+      <a href="https://github.com/mw9k/magnum">
+      <i class="fa fa-github" aria-hidden="true"></i><em>&nbsp;</em>Github</a>
+      </p>
+    </div> 
 </footer>
 </body>
 </html>

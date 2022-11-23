@@ -1,9 +1,10 @@
 // Scraping functions.
-//--------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Scraping for a locally hosted JSON tree of Magnus' losses,
 // like an endgame table for the last few steps of the search.
 // Cuts down on fetch requests to chess.com API.
 // For my internal use. Not completely automated nor obvious in how to use.
+// Messy, long functions... not pretty but works.
 // Leaving this stuff in incase anyone notices an error in how I collected the
 // data, or in case its useful to anyone trying to achieve similar.
 
@@ -12,7 +13,7 @@ document.addEventListener("click", function(e) {
   if (e.target.id == "launchSearch") {
     // localStorage.clear();
     scrapeGen("rapid", 1);
-    // after scraping each full gen (all 3 TCs), remember to upload the new JSON.
+    // After scraping each full gen (all 3 TCs), remember to upload the new JSON
   }
 });
 
@@ -25,10 +26,10 @@ async function scrapeGen(timeClass, generation) {
   }
 
   const objName = `${timeClass}DefeatersGen${generation}`;
-  if (!localStorage.data) localStorage.data = JSON.stringify({})
-  let localdata = JSON.parse(localStorage.data);
+  if (!localStorage.endTable) localStorage.endTable = JSON.stringify({})
+  let localdata = JSON.parse(localStorage.endTable);
 
-  if (!localdata[objName]) {  // create blank obj if doesn't already exist in localdata
+  if (!localdata[objName]) {  // Create blank obj if not already in localdata
     let scraped = await blankScrape(timeClass, generation);
     if (!Object.keys(scraped)) {
       console.log("Error. Couldn't start next generation");
@@ -37,23 +38,26 @@ async function scrapeGen(timeClass, generation) {
   }
 
   if (!localdata[objName]) {
-    console.log("Error. Couldn't generate object. Try clearing localStorage, then retrying.");
-  } else {  // if blank obj already present, look to fill in one user at a time
+    console.log(`Error. Couldn't generate object. Try clearing localStorage,
+     then retrying.`);
+  } else {  // If blank obj already present, look to fill in one user at a time
             // based on the textbox input.
 
-    let alreadySeen = ["MagnusCarlsen"]; // prevent repeating users from prev. generations
+    let alreadySeen = ["MagnusCarlsen"]; 
+    // Prevent repeating users from prev. gens...
     for (let i = generation - 1; i > 0; i--) {
-      let users = data[`${timeClass}DefeatersGen${i}`];
+      let users = endTable[`${timeClass}DefeatersGen${i}`];
       for (let u in users) {
         alreadySeen.push(u);
       }
     }
 
-    for (let u in localdata[objName]) { // prevent repeat users from same generation
-      alreadySeen.push(u);  // equivalent to the prev gen's "beatBy$"
+    for (let u in localdata[objName]) { 
+      // Prevent repeat users from same gen...
+      alreadySeen.push(u);  // Equivalent to the prev gen's "beatBy$"
       if (localdata[objName][u].beatBy$ && localdata[objName][u].beatBy$.length) {
         for (let d in localdata[objName][u].beatBy$) {
-            alreadySeen.push(d);  // this gen's beatBy$
+            alreadySeen.push(d);  // This gen's beatBy$
         }
       }
     }
@@ -70,17 +74,17 @@ async function scrapeGen(timeClass, generation) {
       }
     } else {
       if (localdata[objName][el("uName").value]) {
-        const sizeLimit = (Object.keys(localdata[objName]).length > 200) ? 40 : 0;
-              // ^ in big gens, only scrape the top-rated x many losses per user.
-              // Should help w/ the app's assumption: higher == closer to Magnus.
-        let losses = await scrapeLosses(el("uName").value, timeClass, alreadySeen, sizeLimit);
+        const szLimit = (Object.keys(localdata[objName]).length > 200) ? 40 : 0;
+              // ^ In big gens, only scrape the top-rated x many losses per user
+              // Should help w/ the app's assumption: higher == closer to Magnus
+        let losses = await scrapeLosses(el("uName").value, timeClass, alreadySeen, szLimit);
         if (!losses.beatBy$ || !losses.beatBy$.length) {
-          delete localdata[objName][el("uName").value]; // exclude 0 loss users
+          delete localdata[objName][el("uName").value]; // Exclude 0 loss users
         } else {
           localdata[objName][el("uName").value] = losses;
         }
 
-        localStorage.data = JSON.stringify(localdata);
+        localStorage.endTable = JSON.stringify(localdata);
         el("txtA").value = `"${objName}": ${JSON.stringify(localdata[objName])}`;
 
         let toScrape = await findNextToScrape(localdata[objName], timeClass, generation);
@@ -105,10 +109,12 @@ async function scrapeGen(timeClass, generation) {
             return;
           }
         }
-        console.log(`${toScrape.unscraped.length} remaining to scrape (of ${toScrape.totalUsers} users).`);
+        console.log(`${toScrape.unscraped.length} remaining to scrape (of  
+                     ${toScrape.totalUsers} users).`);
         console.log(toScrape.totalScraped + " losses found in total.");
       } else {
-        el("txtA").value = "Username not found in data. Try clearing the textbox to get the next empty user.";
+        el("txtA").value = `Username not found in data. Try clearing the textbox
+         to get the next empty user.`;
       }
 
     }
@@ -117,10 +123,10 @@ async function scrapeGen(timeClass, generation) {
 
 
 async function findNextToScrape(obj, timeClass, generation) {
-  let localdata = JSON.parse(localStorage.data);
+  let localdata = JSON.parse(localStorage.endTable);
   let unscraped = [], totalScraped = 0, totalUsers = 0, lastUser = "";
   for (let u in obj) {
-    lastUser = u; // if all already scraped, still offer a username to re-scrape
+    lastUser = u; // If all already scraped, still offer a username to re-scrape
     totalUsers++;
     if(Object.keys(obj[u]).length === 0) {
       unscraped.push(u);
@@ -135,7 +141,7 @@ async function findNextToScrape(obj, timeClass, generation) {
   // Also goes w/ thesis that higher rating == closer to Magnus.
   unscraped.sort(function(a, b){
     let aRating = 0, bRating = 0;
-    const lookIn = data[`${timeClass}DefeatersGen${generation - 1}`];
+    const lookIn = endTable[`${timeClass}DefeatersGen${generation - 1}`];
     for (let u in lookIn) {
       for (let u2 in lookIn[u]) {
         if (u2 == a) aRating = lookIn[u][u2].oppRating;
@@ -150,14 +156,14 @@ async function findNextToScrape(obj, timeClass, generation) {
 
 
 async function firstGenScrape(timeClass) {
-  // no need to manually call; called by "scrapeGen()"
+  // No need to manually call; called by "scrapeGen()"
   let scraped = await scrapeLosses("MagnusCarlsen",  timeClass);
-  delete scraped.beatBy$;   // the $ is to prevent a username called that.
+  delete scraped.beatBy$;   // The $ is to prevent a username called that.
   txtA.value = `"${timeClass}DefeatersGen1": ${JSON.stringify(scraped)}`;
 }
 
 
-async function scrapeLosses(user,  timeClass, exclusions=[], sizeLimit = false) {
+async function scrapeLosses(user,  timeClass, exclusions=[], szLimit = false) {
   makeTextArea();
   let doneSfx = new Audio("err.wav");
   console.clear();
@@ -194,8 +200,9 @@ async function scrapeLosses(user,  timeClass, exclusions=[], sizeLimit = false) 
               alreadyExcluded.push(game[opponent].username);
               continue;
             }
-            // exclude undesirable games...
-            if (game.initial_setup !== "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") continue;
+            // Exclude undesirable games...
+            const stdSetup = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+            if (game.initial_setup !== stdSetup) continue;
             if (game.rules !== "chess") continue;
             if (!game.pgn) continue;
             let blackMoveCount = game.pgn.match(/[0-9](\.\.\.)/g);
@@ -209,11 +216,11 @@ async function scrapeLosses(user,  timeClass, exclusions=[], sizeLimit = false) 
             }
             losses[game[opponent].username] = loss;
             losses.beatBy$.push(game[opponent].username);
-        }
+            console.log(game, loss.opponent, loss.oppRating)
       }
     }
-
     console.log(user, lookMonth, lookYear, losses);
+  }
     lookMonth++;
     lookMonth = (lookMonth + "").padStart(2, "0");
     if (lookMonth > 12) {
@@ -226,48 +233,46 @@ async function scrapeLosses(user,  timeClass, exclusions=[], sizeLimit = false) 
   console.log("done");
   doneSfx.play();
 
-  if (sizeLimit ) {  // Limit to top x many wins for larger gens.
-                    // Inexact if certain users have same rating, but close enough.
+  if (szLimit ) { // Limit to top x many wins for larger gens.
+                  // Inexact if certain users have same rating. Close enough.
     let topRated = [];
     if (!losses.beatBy$ || !losses.beatBy$.length) return {};
     for (let l in losses) {
       if (l == "beatBy$") continue;
       if (losses[l].oppRating) topRated.push(losses[l].oppRating);
     }
-    if (topRated.length <= sizeLimit) return losses;
+    if (topRated.length <= szLimit) return losses;
     topRated.sort(function(a, b){return b - a});  // sort reverse numerically
-    const minRating = topRated[sizeLimit - 1];    // find min rating to keep
+    const minRating = topRated[szLimit - 1];    // Find min rating to keep
     for (let l in losses) {
       if (l == "beatBy$") continue;
       if (losses[l].oppRating && losses[l].oppRating < minRating) {
         delete losses[l];
       }
     }
-    let newBeatBy = []; // now update the beatBy array to reflect the changes
+    let newBeatBy = []; // Now update the beatBy array to reflect the changes
     for (let b of losses.beatBy$) {
       if (losses[b]) newBeatBy.push(b);
     }
     losses.beatBy$ = newBeatBy;
   }
-
-
   return losses;
 }
 
 
 async function blankScrape(timeClass, generation) {
-  // Build a blank stringified object from previous gen's data, ready to be filled.
+  // Build a blank stringified object from prev. gen's data, ready to be filled.
   // No need to manually call, will be built if doesn't exist.
 
   let jsonObj = timeClass + "DefeatersGen" + (generation - 1);
-  if (data[jsonObj] === undefined) {
+  if (endTable[jsonObj] === undefined) {
     console.log("prev. gen object not yet in JSON data");
     return false;
   }
   makeTextArea();
   let defs = [];
-  let obj = data[jsonObj];
-  if (generation == 2) {  // different procedure to read from 1st gen.
+  let obj = endTable[jsonObj];
+  if (generation == 2) {  // Different procedure to read from 1st gen.
     for (const u in obj) {
       defs.push(u);
     }
@@ -282,7 +287,7 @@ async function blankScrape(timeClass, generation) {
 
   let blanks = {};
   for (let d of defs) {
-    blanks[d] = {}; // should auto-eliminate duplicates
+    blanks[d] = {}; // Should auto-eliminate duplicates
   }
 
   console.log("Gen" + generation, "  Size " + Object.keys(blanks).length, defs);
@@ -297,16 +302,4 @@ async function makeTextArea() {
     txtA.setAttribute("style", "height:100em; width:100%;");
     document.body.appendChild(txtA);
   }
-}
-
-async function findMinRatings() {
-
-  // fixme: time the search in js to see which one...
-
-  // final step, build a big index of every username; for simpler / quicker searching.
-
-
-  // final step; build an object compiling the minimum ratings seen in each
-  // generation, to give a quick check for whether it's worth searching.
-
 }
