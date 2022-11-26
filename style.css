@@ -11,7 +11,7 @@ body {
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  font-size: medium;
+  font-size: large;
 }
 
 body > * {
@@ -164,10 +164,9 @@ body.unloaded #controls {
   color: darkorange;
   font-size: 2em;
   font-weight: bold;
-  padding: .85em;
-  padding-left: .25em;
+  padding: .85em 0;
   border-bottom: 2px #b3cae2 solid;
-  margin: 0 .7em;
+  margin: 0 .5em;
   overflow: visible;
   position: relative;
 }
@@ -184,7 +183,7 @@ body.unloaded #controls {
   font-size: .5em;
   color: #202121;
   font-weight: normal;
-  margin-left: .6em;
+  /* margin-left: .25em; */
   margin-right: 1.2em;  /* for more sensitive wrap */
 }
 
@@ -236,39 +235,17 @@ body.looking #progressIndicator {
   display: block;
 }
 
-/* #bottomText:empty, body.success #bottomText {
-  display: none;
-}
-
-#bottomText:not(:empty) {
-  display: block;
-} */
-
 .loadingSpin {
   display: block;
   position: relative;
   margin: 0 auto;
   height: 2.4em;
   width: 2.4em;
-  border: 5px darkorange solid;
-  border-top-color: transparent;
-  border-left-color: transparent;
+  border: 5px lightgray solid;
+  border-top-color: darkorange;
   border-radius: 50%;
   animation: spin 1.75s infinite linear;
   padding: 0;
-  transform-style: preserve-3d; /* put child element behind */
-}
-
-.loadingSpin::after {
-  content: "";
-  display: block;
-  position: absolute;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  outline: 5px lightgray solid;
-  transform: translateZ(-2px); /* put element behind parent */
 }
 
 
