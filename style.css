@@ -11,7 +11,7 @@ body {
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  font-size: 1.2em;
+  font-size: medium;
 }
 
 body > * {
@@ -82,7 +82,7 @@ body.error #results {
 
 #results p {
   margin: 1.5em;
-  line-height: 1.6em;
+  line-height: 1.75em;
 }
 
 
