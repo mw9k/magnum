@@ -105,9 +105,7 @@ async function runSearch() {
 	if (!glb.defeatsChain.length) {	// Initiate search if not already initiated
 		let validated = await validate([el("uName").value]);
 		if (!validated.valid) {
-			if (validated.msg == "MagnusCarlsen") {
-				handleResult("MagnusCarlsen");
-			} else displayError(validated.msg);
+			if (validated.msg) displayError(validated.msg);
 			return false;
 		} else {
 			glb.defeatsChain = [validated.username];
@@ -160,7 +158,11 @@ function handleResult(result, user) {
     return;
   }
 	if (result == "MagnusCarlsen") {
-		alert("its him");
+		el("defeatsList").innerHTML = `<li class='noNumber'>0. <span>MagnusCarlsen 
+		is MagnusCarlsen.</span></li>`;
+
+		showResults(`<h2>Results</h2>  <p> Search complete. <b>0 
+		${el("timeClass").value} wins</b> separate MagnusCarlsen from MagnusCarlsen.`);
 		return;
 	}
   if (result && Object.keys(result)) {
@@ -203,7 +205,7 @@ async function getBestMonthGames(user, timeClass, stats) {
 	return gameList;
 }
 
-async function validate(username="", msg="", valid=false) {
+async function validate(username="", msg="") {
 	const badChars = String(username).match(/[^a-z^A-Z^0-9^_^-]+/g) || ""; 
 	if (username == "") {
 		msg = "Username cannot be blank.";
@@ -222,8 +224,8 @@ async function validate(username="", msg="", valid=false) {
   // Get correctly capitalised username from end of URL...
 	username = profile.url.match(/[^/]*$/g)[0];
 	if (username == "MagnusCarlsen") {
-		addEntry("MagnusCarlsen");
-		return {username:username, valid:false, msg:"MagnusCarlsen"};
+		handleResult("MagnusCarlsen");
+		return { username: username, valid:false, msg: undefined };
 	}
 	return {username:username, valid:true, msg:undefined};
 }
@@ -334,14 +336,10 @@ async function findInEndTable(user, timeClass) {
 function addEntry(eData) {
 	// Visually display each found user in the search
 	var entry = document.createElement("li");
-	if (eData == "MagnusCarlsen") {
-		entry.innerHTML = "<span>MagnusCarlsen <em>is</em> MagnusCarlsen</span>";
-	} else {
-		entry.innerHTML = `
-			<span><a href=${eData.url} target="_blank" rel="noopener noreferrer">
-			On ${eData.date}</a> <b>${eData.winner}</b>&thinsp;(${eData.winnerRating})
-			defeated <b> ${eData.loser}</b>&thinsp;(${eData.loserRating})</span>`;
-	}
+	entry.innerHTML = `
+		<span><a href=${eData.url} target="_blank" rel="noopener noreferrer">
+		On ${eData.date}</a> <b>${eData.winner}</b>&thinsp;(${eData.winnerRating})
+		defeated <b> ${eData.loser}</b>&thinsp;(${eData.loserRating})</span>`;
 		el("defeatsList").appendChild(entry);
 }
 
@@ -365,8 +363,8 @@ function showResults(msg) {
 	const plural2 = (glb.defeatsChain.length > 1) ? "" : "s";
 
   if (!msg) msg = `<h2>Results</h2>  <p> Search complete. 
-	<b>${glb.defeatsChain.length} ${glb.chosenTime} win${plural1}</b> separate${plural2}
-	${glb.defeatsChain[0]} from MagnusCarlsen.`;
+	<b>${glb.defeatsChain.length} ${glb.chosenTime} win${plural1}</b>
+	separate${plural2} ${glb.defeatsChain[0]} from MagnusCarlsen.`;
 	
   el("results").innerHTML = msg;
 }
