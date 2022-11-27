@@ -17,6 +17,15 @@ function capitaliseFirstLetter(input) {
 
 function setState(state) {
 	document.body.classList = state;
+	if (state == "looking" || state == "keepGoing") {
+		el("uName").setAttribute("disabled", "");
+		el("timeClass").setAttribute("disabled", "");
+		el("launchSearch").setAttribute("disabled", "");
+	} else {
+		el("uName").removeAttribute("disabled");
+		el("timeClass").removeAttribute("disabled");
+		el("launchSearch").removeAttribute("disabled");
+	}
 }
 
 
@@ -40,10 +49,10 @@ async function loadData() {
 	// Load pre-baked JSON data containing last few generations of search.
 	// Like an endgame table to resolve the search; & cuts repetitive API fetches
 	let found = false;
+	Plan A:
+	glb.endTable = await fetch("./endtable.json")
 	// Plan B:
 	// glb.endTable = await fetch("https://api.npoint.io/a769d4a5fc9905b6d8a9")	
-	// Plan A:
-	glb.endTable = await fetch("./endtable.json")
 	.then((res)=>{
 		if(res.ok) {
 			found = true;
@@ -96,7 +105,9 @@ async function runSearch() {
 	if (!glb.defeatsChain.length) {	// Initiate search if not already initiated
 		let validated = await validate([el("uName").value]);
 		if (!validated.valid) {
-			displayError(validated.msg);
+			if (validated.msg == "MagnusCarlsen") {
+				handleResult("MagnusCarlsen");
+			} else displayError(validated.msg);
 			return false;
 		} else {
 			glb.defeatsChain = [validated.username];
@@ -110,18 +121,29 @@ async function runSearch() {
 	for (let i = 0; i < 8; i++) {	
 		// Only look 8x, require manual intervention to look further.
 		// Prevents infinite loops etc
-
+		if (glb.cancelled) {
+			handleResult("cancelled");	// (Mult. pts of cancellation)
+			return;
+		}
 		const user = glb.defeatsChain[glb.defeatsChain.length - 1];
 		if (!stats[user]) {  // Don't re-download if already present
 			stats[user] = await downloadStats(user, glb.chosenTime);
 			if (stats[user]) {
+				if (glb.cancelled) {
+					handleResult("cancelled");	// (Mult. pts of cancellation)
+					return;
+				}
 				bestMonth[user] = await getBestMonthGames(user, glb.chosenTime, stats[user]);
 			}	
 		}
+		if (glb.cancelled) handleResult("cancelled");	// (Mult. pts of cancellation)
+
 		if (bestMonth[user]) {
 			var result = await findBestWin(user, glb.chosenTime, bestMonth[user]);
+		} else {
+			backtrack(user, glb.chosenTime);
 		}
-		handleResult(result);
+		handleResult(result, user);
 		if (!glb.currentlyLooking) return;
   }
 	if (!glb.finished && glb.currentlyLooking && glb.defeatsChain.length) {
@@ -131,21 +153,26 @@ async function runSearch() {
   }
 }
 
-function handleResult(result) {
+
+function handleResult(result, user) {
 	if (glb.cancelled || result == "cancelled") {
     clearSearch();
     return;
   }
+	if (result == "MagnusCarlsen") {
+		alert("its him");
+		return;
+	}
   if (result && Object.keys(result)) {
-    if (result.loser == "MagnusCarlsen") {
-      addEntry(result);
+		if (result.loser == "MagnusCarlsen") {
+			addEntry(result);
       showResults();
     } else {
-      addEntry(result);
+			addEntry(result);
 			glb.alreadySeen.push( lCase(result.winner) );
 			glb.defeatsChain.push(result.loser);
     }
-  }
+	}
 }
 
 async function downloadStats(user, timeClass) {
@@ -172,13 +199,17 @@ async function getBestMonthGames(user, timeClass, stats) {
 	const gameList = await fetch(`https://api.chess.com/pub/player/${user}/games/${bestGameYear}/${bestGameMonth}`)
 		.then((res) => {
 			return (res.ok) ? res.json() : false;
-		});
+		})
+	console.log(gameList);
+	gameList.sort(function (a, b) {
+		return a. > (b.last_nom)
+	});
 	console.log(gameList);
 	return gameList;
 }
 
 async function validate(username="", msg="", valid=false) {
-	const badChars = String(username).match(/[^a-z^A-Z^0-9^_^-]+/g) || "";
+	const badChars = String(username).match(/[^a-z^A-Z^0-9^_^-]+/g) || ""; 
 	if (username == "") {
 		msg = "Username cannot be blank.";
 	} else if (badChars.length) {
@@ -193,13 +224,15 @@ async function validate(username="", msg="", valid=false) {
 		msg = `User "${username}" not found.`;
 		return {username:username, valid:false, msg:msg};
 	}
-  // Get correctly capitalised username, to match URLs...
+  // Get correctly capitalised username from end of URL...
 	username = profile.url.match(/[^/]*$/g)[0];
 	if (username == "MagnusCarlsen") {
+		addEntry("MagnusCarlsen");
 		return {username:username, valid:false, msg:"MagnusCarlsen"};
 	}
 	return {username:username, valid:true, msg:undefined};
 }
+
 
 
 async function findBestWin(user, timeClass, gameList) {
@@ -214,6 +247,7 @@ async function findBestWin(user, timeClass, gameList) {
 
 	// Look for top rated opponent in game list
 	for (const game of gameList.games) {
+		if (glb.cancelled) return "cancelled";	// (Multiple points of cancellation)
 		if (game.time_class !==  timeClass) continue;
 		playingAs = (lCase(game.white.username) == lCase(user)) ? "white" : "black";
 		opponent = (playingAs == "white") ? "black" : "white";
@@ -247,6 +281,7 @@ async function findBestWin(user, timeClass, gameList) {
 	return { url:bestGameURL, date:winDate, winner:user,
 		  		 winnerRating:ratingAttained, loser:bestOpp, loserRating:topWin};
 }
+
 
 
 async function backtrack(user, timeClass="selected") {
@@ -304,10 +339,14 @@ async function findInEndTable(user, timeClass) {
 function addEntry(eData) {
 	// Visually display each found user in the search
 	var entry = document.createElement("li");
-	entry.innerHTML = `
-		<span><a href=${eData.url} target="_blank" rel="noopener noreferrer">
-		On ${eData.date}</a> <b>${eData.winner}</b>&thinsp;(${eData.winnerRating})
-    defeated <b> ${eData.loser}</b>&thinsp;(${eData.loserRating})</span>`;
+	if (eData == "MagnusCarlsen") {
+		entry.innerHTML = "<span>MagnusCarlsen <em>is</em> MagnusCarlsen</span>";
+	} else {
+		entry.innerHTML = `
+			<span><a href=${eData.url} target="_blank" rel="noopener noreferrer">
+			On ${eData.date}</a> <b>${eData.winner}</b>&thinsp;(${eData.winnerRating})
+			defeated <b> ${eData.loser}</b>&thinsp;(${eData.loserRating})</span>`;
+	}
 		el("defeatsList").appendChild(entry);
 }
 
@@ -333,13 +372,13 @@ function showResults(msg) {
   if (!msg) msg = `<h2>Results</h2>  <p> Search complete. 
 	<b>${glb.defeatsChain.length} ${glb.chosenTime} win${plural1}</b> separate${plural2}
 	${glb.defeatsChain[0]} from MagnusCarlsen.`;
-
+	
   el("results").innerHTML = msg;
 }
 
 
 function displayError(msg) {
-  clearSearch();
+	clearSearch();
   setState("error");
   let heading = `<h2><i class="fa fa-exclamation-triangle"></i></h2>`;
   el("results").innerHTML = `${heading}  <p>${msg}</p>`;
