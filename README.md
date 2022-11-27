@@ -5,13 +5,8 @@ Live at https://mw9k.github.io/magnum/
 
 - Unofficial hobby project; not associated with Chess.com.
 - Attempts to find any Chess.com user's 'Magnus Number' - a chain of victories that leads to GM Magnus Carlsen.
-  Even low rated players may find that they have 'defeated' Magnus in this way.
-- Not necessarily shortest path. Therefore, might not find your TRUE Magnus number.
-  For now, I have used some indirect workarounds to avoid overwhelming chess.com's public API.
-- Work in progress. Dead ends may occur, despite best efforts to backtrack / avoid loops.
-- Requires a modern browser.
 
-## Current Algorithm Lacks Discernment...
+## Current Algorithm:
 Essentially it works by finding the (approximately) best rated 
 opponent that each user defeated, then 
 following that chain upwards until it finds 
@@ -20,9 +15,6 @@ last 2-3 generations of direct Magnus defeaters.
 
 This approach arises from limitations of
 the API, but it is often not shortest path.
-I plan to update the algorithm soon to at least
-consider some alternatives, and to
-prefer more promising paths.
 
 ## Not Open Source (yet)
 I am not adding an open source licence just yet, until 
