@@ -200,11 +200,6 @@ async function getBestMonthGames(user, timeClass, stats) {
 		.then((res) => {
 			return (res.ok) ? res.json() : false;
 		})
-	console.log(gameList);
-	gameList.sort(function (a, b) {
-		return a. > (b.last_nom)
-	});
-	console.log(gameList);
 	return gameList;
 }
 
