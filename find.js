@@ -49,7 +49,7 @@ async function loadData() {
 	// Load pre-baked JSON data containing last few generations of search.
 	// Like an endgame table to resolve the search; & cuts repetitive API fetches
 	let found = false;
-	Plan A:
+	// Plan A:
 	glb.endTable = await fetch("./endtable.json")
 	// Plan B:
 	// glb.endTable = await fetch("https://api.npoint.io/a769d4a5fc9905b6d8a9")	
