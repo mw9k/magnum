@@ -50,9 +50,9 @@ async function loadData() {
 	// Like an endgame table to resolve the search; & cuts repetitive API fetches
 	let found = false;
 	// Plan A:
-	glb.endTable = await fetch("./endtable.json")
+	// glb.endTable = await fetch("./endtable.json")
 	// Plan B:
-	// glb.endTable = await fetch("https://api.npoint.io/a769d4a5fc9905b6d8a9")	
+	glb.endTable = await fetch("https://api.npoint.io/a769d4a5fc9905b6d8a9")	
 	.then((res)=>{
 		if(res.ok) {
 			found = true;
@@ -161,7 +161,7 @@ function handleResult(result, user) {
 		el("defeatsList").innerHTML = `<li class='noNumber'>0. <span>MagnusCarlsen 
 		is MagnusCarlsen.</span></li>`;
 
-		showResults(`<h2>Results</h2>  <p> Search complete. <b>0 
+		showResults(`<h2>Results</h2><p>Search complete. <b>0 
 		${el("timeClass").value} wins</b> separate MagnusCarlsen from MagnusCarlsen.`);
 		return;
 	}
@@ -362,7 +362,7 @@ function showResults(msg) {
 	const plural1 = (glb.defeatsChain.length > 1) ? "s" : "";
 	const plural2 = (glb.defeatsChain.length > 1) ? "" : "s";
 
-  if (!msg) msg = `<h2>Results</h2>  <p> Search complete. 
+  if (!msg) msg = `<h2>Results</h2><p>Search complete. 
 	<b>${glb.defeatsChain.length} ${glb.chosenTime} win${plural1}</b>
 	separate${plural2} ${glb.defeatsChain[0]} from MagnusCarlsen.`;
 	
@@ -374,5 +374,5 @@ function displayError(msg) {
 	clearSearch();
   setState("error");
   let heading = `<h2><i class="fa fa-exclamation-triangle"></i></h2>`;
-  el("results").innerHTML = `${heading}  <p>${msg}</p>`;
+  el("results").innerHTML = `${heading}<p>${msg}</p>`;
 }
