@@ -1,3 +1,11 @@
+html {
+  font-size: 18px;
+}
+
+label {
+  font-size: 17px;
+}
+
 body {
   background: #F0EEEF;
   cursor: auto;
@@ -11,7 +19,6 @@ body {
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  font-size: large;
 }
 
 body > * {
@@ -161,7 +168,7 @@ body.unloaded #controls {
   list-style-position: inside;
   white-space: nowrap;
   color: darkorange;
-  font-size: 2em;
+  font-size: 1.7em;
   font-weight: bold;
   padding: .85em 0;
   border-bottom: 2px #b3cae2 solid;
@@ -183,7 +190,7 @@ body.unloaded #controls {
   white-space: normal;
   overflow-wrap: normal;
   display: inline-block;
-  font-size: .5em;
+  font-size: 17px;
   color: #202121;
   font-weight: normal;
   /* margin-left: .25em; */
@@ -365,6 +372,12 @@ input, select {
   footer div#bottomRow>*  {
     margin: .4em;
   }
+  /* body {
+    font-size: 15px;
+  }
+  #defeatsList li span {
+    font-size: 15px;
+  } */
 }
 
 footer #bottomRow>* {
