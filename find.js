@@ -77,9 +77,6 @@ document.addEventListener("click", function(e) {
 		let targetElem = el(e.target.dataset.targetid);
 		e.target.parentNode.classList.toggle("shown");
 		targetElem.classList.toggle("shown");
-		if (targetElem.classList.contains("shown")) {
-			targetElem.scrollIntoView({ block: "start"});
-		}
 	}
 });
 
@@ -347,6 +344,9 @@ function addEntry(eData) {
 function clearSearch() {
 	// Reset interface and variables, ready for a new search
 	setState("reset");
+	el("moreInfo").classList.remove("shown");
+	el("moreInfoTrigger").classList.remove("shown");
+
 	el("defeatsList").innerHTML = "";
 	glb.defeatsChain = [];
 	glb.alreadySeen = [];

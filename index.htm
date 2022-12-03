@@ -20,9 +20,37 @@
 
 </head>
 <body class=unloaded>
-  <h1>Magnus Number Estimator</h1>
+  <header>
+    <h1>Magnus Number Estimator</h1>
+    <div id="bottomRow">
+      <p id=moreInfoTrigger>
+        <span class="revealTrigger stateA" data-targetid="moreInfo">More Info<em>&nbsp;</em><i
+            class="fa fa-chevron-circle-down"></i></span>
+        <span class="revealTrigger stateB" data-targetid="moreInfo">Hide Info<em>&nbsp;</em><i
+            class="fa fa-chevron-circle-up"></i></span>
+      </p>
 
-  
+    </div>
+
+    <ul id=moreInfo class="stateB">
+      <li>Unofficial personal project. Not associated with Chess.com.</li>
+      <li>Attempts to find any Chess.com user's Magnus Number - a chain of victories
+        by which they "defeated" GM Magnus Carlsen. </li>
+      <li>Not necessarily shortest path. Your <em>true</em> Magnus Number may be lower.
+        This simple estimate is the best I can do with chess.com's public API.</li>
+      <li>Dead ends may occur, despite best efforts to backtrack / avoid loops.</li>
+      <li>Requires a modern browser.</li>
+      <li>This site respects your privacy - no tracking or other cookies used.</li>
+      <li>Feedback &amp; Bug reports: contact me on <a
+          href="https://www.reddit.com/message/compose/?to=BigGuyForYou_">Reddit</a></li>
+      <li> <b>Not open source.</b> I prefer to retain sole authorship, as this is my first completed website.
+        Anyone is of course welcome to implement the same idea. 
+        The full source is inspectable on <a href="https://github.com/mw9k/magnum">
+        <i class="fa fa-github" aria-hidden="true"></i><em>&nbsp;</em>Github</a>
+      </li>
+      
+    </ul>
+  </header>
 
   <div id=centralColumn>
     <p id=loadingCover>Loading Data<br><span class=loading>...</span></p>
@@ -56,31 +84,5 @@
       </div>
     </div>
   </div>
-
-  <footer>
-
-    <ul id=moreInfo class="stateB">
-      <li>Unofficial personal project. Not associated with Chess.com.</li>
-      <li>Attempts to find any Chess.com user's Magnus Number - a chain of victories  
-        by which they "defeated" GM Magnus Carlsen. </li>
-      <li>Not necessarily shortest path. Your <em>true</em> Magnus number may be lower. 
-        This simple estimate is the best I can do with chess.com's public API.</li>
-      <li>Dead ends may occur, despite best efforts to backtrack / avoid loops.</li>
-      <li>Requires a modern browser.</li>
-      <li>This site respects your privacy - no tracking or other cookies used.</li>
-      <li>Feedback &amp; Bug reports: contact me on <a href="https://www.reddit.com/message/compose/?to=BigGuyForYou_">Reddit</a></li>
-    </ul>
-    <div id="bottomRow">
-      <p>
-        <span class="revealTrigger stateA" data-targetid="moreInfo">More Info<em>&nbsp;</em><i class="fa fa-chevron-circle-up"></i></span>
-        <span class="revealTrigger stateB" data-targetid="moreInfo">Hide Info<em>&nbsp;</em><i class="fa fa-chevron-circle-down"></i></span>
-      </p>
-      <p>Find your connection to the world's top player.</p>
-      <p>
-      <a href="https://github.com/mw9k/magnum">
-      <i class="fa fa-github" aria-hidden="true"></i><em>&nbsp;</em>Github</a>
-      </p>
-    </div> 
-</footer>
 </body>
 </html>
