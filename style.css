@@ -3,13 +3,13 @@ html {
 }
 
 label {
-  color: #779eb7;
+  color: #949494;
   font-size: .9rem;
 }
 
 body {
-  background: #14161c;
-  color: ghostwhite;
+  background: #151515;
+  color: white;
   cursor: auto;
   font-family: 'Istok Web', sans-serif;
   text-align: center;
@@ -41,7 +41,7 @@ i.fa {
 }
 
 h1 {
-  color: ghostwhite;
+  color: white;
   width: 100%;
   font-size: 1.4rem;
   font-weight: 600;
@@ -69,9 +69,9 @@ body.error #results {
   animation: fadeIn .5s;
   text-align: center;
   overflow: hidden;
-  background: #FFF;
+  background: #1E1E1E;
   width: calc(100% - 10px); /* shrink by border size */
-  border: 5px solid darkorange;
+  border: 5px solid #019592;
   border-radius: .25rem;
   overflow: auto;
 }
@@ -82,7 +82,7 @@ body.error #results {
 }
 
 #results h2 {
-  background: darkorange;
+  background: #019592;
   color: white;
   width: 100%;
   font-size: 1.4rem;
@@ -154,27 +154,29 @@ body.unloaded #controls {
  }
 
 #defeatsList:not(:empty) {
-  animation: fadeIn .3s;242630
-  border-radius: .1rem;
+  animation: fadeIn .3s;
   width: calc(100% - 6px); /* shrink by border size */
   text-align: left;
   list-style-position: outside;
   padding: 0;
-  outline: 2px #242630 solid;
-  background: #101016;
 }
 
 #defeatsList li {
+  background: #1E1E1E;
+  color: #949494;
+  /* outline: 2px #242630 solid; */
+  /* border-left: 8px #2E2E2E solid; */
+  margin: 1rem .75rem;
+  padding: 1rem .25rem;
+  border-radius: .2rem;
   animation: fadeIn .3s;
   line-height: 105%;
   list-style-position: inside;
   white-space: nowrap;
-  color: #779eb7;
+  /* color: #5397ef; */
   font-size: 1.3rem;
   font-weight: bold;
-  padding: 1.25rem 0;
-  border-bottom: 3px #1e202a solid;
-  margin: 0 1rem;
+  /* border-bottom: 3px #1e202a solid; */
   overflow: visible;
   position: relative;
 }
@@ -188,12 +190,12 @@ body.unloaded #controls {
 }
 
 #defeatsList li span {
+  color: #fff;
   vertical-align: middle;
   white-space: normal;
   overflow-wrap: normal;
   display: inline-block;
   font-size: 17px;
-  color: ghostwhite;
   font-weight: normal;
   /* margin-left: .25rem; */
   margin-right: 1.2rem;  /* for more sensitive wrap */
@@ -201,7 +203,7 @@ body.unloaded #controls {
 
 .actionText {
   text-decoration: underline;
-  color: #D46700;
+  color: #019592;
   font-weight: bold;
   cursor: pointer;
   display: none;
@@ -215,7 +217,12 @@ body.unloaded #controls {
   color: orange;
 }
 
-body.keepGoing #keepLookingText.actionText {
+
+#keepLooking2 {
+  display: none;
+}
+
+body.keepGoing #keepLooking2 {
   display: block;
   animation: fadeIn .5s;
 }
@@ -253,9 +260,9 @@ body.looking #progressIndicator {
   margin: 0 auto;
   height: 2.4rem;
   width: 2.4rem;
-  border: 5px #1E202A solid;
-  border-left-color: orange;
-  border-top-color: orange;
+  border: 5px #222222 solid;
+  border-left-color: #00B3A6;
+  border-top-color: #00B3A6;
   border-radius: 50%;
   animation: spin 1.75s infinite linear;
   padding: 0;
@@ -338,9 +345,9 @@ button#stopSearch:hover {
 
 input, select {
   background-color: #0a0a0a;
-  color: ghostwhite;
+  color: white;
   padding: .4rem;
-  border:1px #1e1e2e solid;
+  border:1px #2a2a2a solid;
   margin-left: .3rem;
   font-size: 16px;
 }
@@ -404,8 +411,8 @@ header {
   justify-content: space-evenly;
   padding: 0;
   margin: 0;
-  background: #1E202A;
-  color: ghostwhite;
+  background: #212121;
+  color: white;
   min-height: 4rem;
 }
 

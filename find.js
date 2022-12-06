@@ -66,7 +66,7 @@ async function loadData() {
 
 document.addEventListener("click", function(e) {
 	if (e.target.id == "launchSearch" || e.target.id == "keepLooking" ||
-			e.target.id == "keepLookingText") {
+			e.target.id == "keepLooking2") {
 		if (!glb.currentlyLooking) runSearch();
 	} else if (e.target.id == "viewResults") {
 		el("results").scrollIntoView({behavior:"smooth", block:"center"});
