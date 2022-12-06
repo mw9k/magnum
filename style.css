@@ -3,11 +3,13 @@ html {
 }
 
 label {
+  color: #779eb7;
   font-size: .9rem;
 }
 
 body {
-  background: #F0EEEF;
+  background: #14161c;
+  color: ghostwhite;
   cursor: auto;
   font-family: 'Istok Web', sans-serif;
   text-align: center;
@@ -39,7 +41,6 @@ i.fa {
 }
 
 h1 {
-  background-color: #1F2939;
   color: ghostwhite;
   width: 100%;
   font-size: 1.4rem;
@@ -153,14 +154,14 @@ body.unloaded #controls {
  }
 
 #defeatsList:not(:empty) {
-  animation: fadeIn .3s;
+  animation: fadeIn .3s;242630
   border-radius: .1rem;
   width: calc(100% - 6px); /* shrink by border size */
   text-align: left;
   list-style-position: outside;
   padding: 0;
-  outline: 2px #889db2 solid;
-  background: white;
+  outline: 2px #242630 solid;
+  background: #101016;
 }
 
 #defeatsList li {
@@ -168,11 +169,11 @@ body.unloaded #controls {
   line-height: 105%;
   list-style-position: inside;
   white-space: nowrap;
-  color: darkorange;
-  font-size: 1.7rem;
+  color: #779eb7;
+  font-size: 1.3rem;
   font-weight: bold;
   padding: 1.25rem 0;
-  border-bottom: 2px #b3cae2 solid;
+  border-bottom: 3px #1e202a solid;
   margin: 0 1rem;
   overflow: visible;
   position: relative;
@@ -192,7 +193,7 @@ body.unloaded #controls {
   overflow-wrap: normal;
   display: inline-block;
   font-size: 17px;
-  color: #202121;
+  color: ghostwhite;
   font-weight: normal;
   /* margin-left: .25rem; */
   margin-right: 1.2rem;  /* for more sensitive wrap */
@@ -252,9 +253,9 @@ body.looking #progressIndicator {
   margin: 0 auto;
   height: 2.4rem;
   width: 2.4rem;
-  border: 5px #D0D0D0 solid;
-  border-left-color: darkorange;
-  border-top-color: darkorange;
+  border: 5px #1E202A solid;
+  border-left-color: orange;
+  border-top-color: orange;
   border-radius: 50%;
   animation: spin 1.75s infinite linear;
   padding: 0;
@@ -285,15 +286,15 @@ body.success #viewResults {
 button {
   padding: .5rem;
   cursor: pointer;
-  border: 1.5px #1f7337 solid;
+  border: none;
   border-radius: .25rem;
-  background: #2DA44E;
+  background: #5028C8;
   color: white;
   font-size: 17px;
 }
 
 button:hover {
-  background: #24833e;
+  background: #381c8c;
 }
 
 button:disabled {
@@ -336,7 +337,10 @@ button#stopSearch:hover {
 }
 
 input, select {
+  background-color: #0a0a0a;
+  color: ghostwhite;
   padding: .4rem;
+  border:1px #1e1e2e solid;
   margin-left: .3rem;
   font-size: 16px;
 }
@@ -377,7 +381,6 @@ header #bottomRow >* {
 
 
 #bottomRow {
-  border-top: 1px rgba(255,255,255,0.3) solid;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -385,6 +388,12 @@ header #bottomRow >* {
   justify-content: center;
   min-height: 2.5rem;
   line-height: 2.5rem;
+}
+
+li ul {
+  font-color: red !important;
+  padding:0;
+  margin:0;
 }
 
 header {
@@ -395,7 +404,7 @@ header {
   justify-content: space-evenly;
   padding: 0;
   margin: 0;
-  background: #1F2939;
+  background: #1E202A;
   color: ghostwhite;
   min-height: 4rem;
 }
@@ -408,13 +417,13 @@ header ul {
   max-width: 50rem;
 }
 
-header a {
-  color: cornflowerblue;
+a {
+  color: #8569d9;
   word-break: break-word;
 }
 
 header span.revealTrigger {
-  color: cornflowerblue;
+  color: #8569d9;
   cursor: pointer;
   line-height: 2rem;
 }
