@@ -8,7 +8,7 @@ label {
 }
 
 body {
-  background: #1F2125;
+  background: #121212;
   color: ghostwhite;
   cursor: auto;
   font-family: 'Istok Web', sans-serif;
@@ -157,8 +157,8 @@ body.unloaded #controls {
   text-align: left;
   list-style-position: outside;
   padding: 0;
-  background: #2F3135;
-  border: 2px #3e3f43 solid;
+  background: #1F2125;
+  border: 1px #3e3f43 solid;
   border-radius: .5rem;
 }
 
@@ -174,7 +174,7 @@ body.unloaded #controls {
   /* color: #5397ef; */
   font-size: 1.3rem;
   font-weight: bold;
-  border-bottom: 2px #3e3f43 solid;
+  border-bottom: 1px #3e3f43 solid;
   overflow: visible;
   position: relative;
 }
