@@ -8,8 +8,8 @@ label {
 }
 
 body {
-  background: #151515;
-  color: white;
+  background: #1F2125;
+  color: ghostwhite;
   cursor: auto;
   font-family: 'Istok Web', sans-serif;
   text-align: center;
@@ -41,7 +41,6 @@ i.fa {
 }
 
 h1 {
-  color: white;
   width: 100%;
   font-size: 1.4rem;
   font-weight: 600;
@@ -69,9 +68,9 @@ body.error #results {
   animation: fadeIn .5s;
   text-align: center;
   overflow: hidden;
-  background: #1E1E1E;
+  background: #2F3135;
   width: calc(100% - 10px); /* shrink by border size */
-  border: 5px solid #019592;
+  border: 5px solid #735680;
   border-radius: .25rem;
   overflow: auto;
 }
@@ -82,8 +81,7 @@ body.error #results {
 }
 
 #results h2 {
-  background: #019592;
-  color: white;
+  background: #735680;
   width: 100%;
   font-size: 1.4rem;
   margin: 0;
@@ -159,16 +157,16 @@ body.unloaded #controls {
   text-align: left;
   list-style-position: outside;
   padding: 0;
+  background: #2F3135;
+  border: 2px #3e3f43 solid;
+  border-radius: .5rem;
 }
 
 #defeatsList li {
-  background: #1E1E1E;
-  color: #949494;
   /* outline: 2px #242630 solid; */
   /* border-left: 8px #2E2E2E solid; */
-  margin: 1rem .75rem;
-  padding: 1rem .25rem;
-  border-radius: .2rem;
+  margin: 0 .75rem;
+  padding: 2rem .25rem;
   animation: fadeIn .3s;
   line-height: 105%;
   list-style-position: inside;
@@ -176,7 +174,7 @@ body.unloaded #controls {
   /* color: #5397ef; */
   font-size: 1.3rem;
   font-weight: bold;
-  /* border-bottom: 3px #1e202a solid; */
+  border-bottom: 2px #3e3f43 solid;
   overflow: visible;
   position: relative;
 }
@@ -190,7 +188,7 @@ body.unloaded #controls {
 }
 
 #defeatsList li span {
-  color: #fff;
+  color: #bcc2c5;
   vertical-align: middle;
   white-space: normal;
   overflow-wrap: normal;
@@ -203,7 +201,7 @@ body.unloaded #controls {
 
 .actionText {
   text-decoration: underline;
-  color: #019592;
+  color: #b789cc;
   font-weight: bold;
   cursor: pointer;
   display: none;
@@ -228,22 +226,22 @@ body.keepGoing #keepLooking2 {
 }
 
 
-body.looking #reset.actionText {
+body.looking #reset {
   display: block;
 }
 
-body.keepGoing #reset.actionText {
+body.keepGoing #reset {
   display: block;
   font-size: 85%;
 }
 
-#reset.actionText {
+#reset {
   display: none;
-  color: red;
+  background: red;
 }
 
-#reset.actionText:hover {
-  color: darkred;
+#reset:hover {
+  background: darkred;
 }
 
 #progressIndicator {
@@ -260,9 +258,9 @@ body.looking #progressIndicator {
   margin: 0 auto;
   height: 2.4rem;
   width: 2.4rem;
-  border: 5px #222222 solid;
-  border-left-color: #00B3A6;
-  border-top-color: #00B3A6;
+  border: 5px #2F3135 solid;
+  border-left-color: #90B6ED;
+  border-top-color: #90B6ED;
   border-radius: 50%;
   animation: spin 1.75s infinite linear;
   padding: 0;
@@ -411,8 +409,7 @@ header {
   justify-content: space-evenly;
   padding: 0;
   margin: 0;
-  background: #212121;
-  color: white;
+  background: #2F3135;
   min-height: 4rem;
 }
 
