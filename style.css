@@ -157,9 +157,9 @@ body.unloaded #controls {
   text-align: left;
   list-style-position: outside;
   padding: 0;
-  background: #1F2125;
-  border: 1px #3e3f43 solid;
-  border-radius: .5rem;
+  background: #242424;
+  /* border: 1px #3e3f43 solid; */
+  border-radius: .75rem;
 }
 
 #defeatsList li {
@@ -342,7 +342,7 @@ button#stopSearch:hover {
 }
 
 input, select {
-  background-color: #0a0a0a;
+  background-color: #000;
   color: white;
   padding: .4rem;
   border:1px #2a2a2a solid;
@@ -409,12 +409,12 @@ header {
   justify-content: space-evenly;
   padding: 0;
   margin: 0;
-  background: #2F3135;
+  background: #242424;
   min-height: 4rem;
 }
 
-header ul {
-  flex-basis: 100%;
+#moreInfo {
+  width: 100%;
   text-align: left;
   margin: 0 1rem;
   padding: 2rem 10%;
