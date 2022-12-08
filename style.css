@@ -173,7 +173,7 @@ body.unloaded #controls {
   /* border-left: 8px #2E2E2E solid; */
   margin: 0 .75rem;
   padding: 2rem .25rem;
-  animation: fadeIn .3s;
+  animation: fadeIn .5s;
   line-height: 105%;
   list-style-position: inside;
   white-space: nowrap;
@@ -207,8 +207,8 @@ body.unloaded #controls {
 
 .actionText {
   text-decoration: underline;
-  color: #b789cc;
   font-weight: bold;
+  color: #5ADB64;
   cursor: pointer;
   display: none;
 }
@@ -232,13 +232,9 @@ body.keepGoing #keepLooking2 {
 }
 
 
-body.looking #reset {
+body.looking #reset, body.keepGoing #reset {
   display: inline-block;
-}
-
-body.keepGoing #reset {
-  display: inline-block;
-  font-size: 85%;
+  animation: fadeIn .3s;
 }
 
 #reset {
@@ -262,9 +258,9 @@ body.looking #progressIndicator {
   display: block;
   position: relative;
   margin: 0 auto;
-  height: 2.4rem;
-  width: 2.4rem;
-  border: 5px #2F3135 solid;
+  height: 2.25rem;
+  width: 2.25rem;
+  border: 4px #2F3135 solid;
   border-left-color: #5ADB64;
   border-top-color: #5ADB64;
   border-radius: 50%;
