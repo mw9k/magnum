@@ -206,7 +206,6 @@ body.unloaded #controls {
 }
 
 .actionText {
-  text-decoration: underline;
   font-weight: bold;
   color: #5ADB64;
   cursor: pointer;
@@ -218,7 +217,7 @@ body.unloaded #controls {
 }
 
 .actionText:hover {
-  color: orange;
+  text-decoration: underline;
 }
 
 
