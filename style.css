@@ -42,12 +42,17 @@ i.fa {
 
 h1 {
   width: 100%;
+  color: #5ADB64;
   font-size: 1.4rem;
   font-weight: 600;
   display: block;
   padding: .4rem 0;
   white-space: nowrap;
   margin: 0;
+}
+
+h2 {
+    color: #5ADB64;
 }
 
 body.unloaded {
@@ -68,9 +73,8 @@ body.error #results {
   animation: fadeIn .5s;
   text-align: center;
   overflow: hidden;
-  background: #2F3135;
   width: calc(100% - 10px); /* shrink by border size */
-  border: 5px solid #735680;
+  border: 5px solid #5ADB64;
   border-radius: .25rem;
   overflow: auto;
 }
@@ -81,7 +85,8 @@ body.error #results {
 }
 
 #results h2 {
-  background: #735680;
+  color: #121212;
+  background: #5ADB64;
   width: 100%;
   font-size: 1.4rem;
   margin: 0;
@@ -158,6 +163,7 @@ body.unloaded #controls {
   list-style-position: outside;
   padding: 0;
   background: #242424;
+  color: #5ADB64;
   /* border: 1px #3e3f43 solid; */
   border-radius: .75rem;
 }
@@ -174,7 +180,7 @@ body.unloaded #controls {
   /* color: #5397ef; */
   font-size: 1.3rem;
   font-weight: bold;
-  border-bottom: 1px #3e3f43 solid;
+  border-bottom: 1px #404040 solid;
   overflow: visible;
   position: relative;
 }
@@ -188,7 +194,7 @@ body.unloaded #controls {
 }
 
 #defeatsList li span {
-  color: #bcc2c5;
+  color: #D5D8D9;
   vertical-align: middle;
   white-space: normal;
   overflow-wrap: normal;
@@ -227,11 +233,11 @@ body.keepGoing #keepLooking2 {
 
 
 body.looking #reset {
-  display: block;
+  display: inline-block;
 }
 
 body.keepGoing #reset {
-  display: block;
+  display: inline-block;
   font-size: 85%;
 }
 
@@ -259,8 +265,8 @@ body.looking #progressIndicator {
   height: 2.4rem;
   width: 2.4rem;
   border: 5px #2F3135 solid;
-  border-left-color: #90B6ED;
-  border-top-color: #90B6ED;
+  border-left-color: #5ADB64;
+  border-top-color: #5ADB64;
   border-radius: 50%;
   animation: spin 1.75s infinite linear;
   padding: 0;
@@ -296,6 +302,7 @@ button {
   background: #5028C8;
   color: white;
   font-size: 17px;
+  margin: 0 .25rem;
 }
 
 button:hover {
@@ -329,7 +336,7 @@ body.error #launchSearch {
 
 
 body.keepGoing #keepLooking {
-  display: block;
+  display: inline-block;
   animation: fadeIn .5s;
 }
 
