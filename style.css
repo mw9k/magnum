@@ -258,8 +258,8 @@ body.looking #progressIndicator {
   display: block;
   position: relative;
   margin: 0 auto;
-  height: 2.25rem;
-  width: 2.25rem;
+  height: 2.75rem;
+  width: 2.75rem;
   border: 4px #2F3135 solid;
   border-left-color: #5ADB64;
   border-top-color: #5ADB64;
