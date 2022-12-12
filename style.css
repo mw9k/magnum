@@ -65,7 +65,8 @@ h2 {
 }
 
 hr {
-  color: rgba(255, 255, 255, 0.25);
+  color: transparent;
+  border-top: 1px rgba(255, 255, 255, 0.25) solid;
   margin: 1rem 0;
 }
 
@@ -253,11 +254,11 @@ body.looking #reset, body.keepGoing #reset {
 
 #reset {
   display: none;
-  background: red;
+  background: #df2020;
 }
 
 #reset:hover {
-  background: darkred;
+  background: #c91d1d;
 }
 
 #progressIndicator {
@@ -309,14 +310,14 @@ button {
   cursor: pointer;
   border: none;
   border-radius: .25rem;
-  background: blue;
+  background: #2020df;
   color: white;
   font-size: 17px;
   margin: 0 .25rem;
 }
 
 button:hover {
-  background: darkblue;
+  background: #1d1dc9;
 }
 
 button:disabled {
