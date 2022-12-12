@@ -8,8 +8,8 @@ label {
 }
 
 body {
-  background: #121212;
-  color: ghostwhite;
+  background: #1f2023;
+  color: #bdc1c6;
   cursor: auto;
   font-family: 'Istok Web', sans-serif;
   text-align: center;
@@ -42,8 +42,8 @@ i.fa {
 
 h1 {
   width: 100%;
-  color: #5ADB64;
-  font-size: 1.4rem;
+  color: #4fd67d;
+  font-size: 1.6rem;
   font-weight: 600;
   display: block;
   padding: .4rem 0;
@@ -52,7 +52,8 @@ h1 {
 }
 
 h2 {
-    color: #5ADB64;
+    font-size: 1.5rem;
+    color: #4fd67d;
 }
 
 body.unloaded {
@@ -74,7 +75,7 @@ body.error #results {
   text-align: center;
   overflow: hidden;
   width: calc(100% - 10px); /* shrink by border size */
-  border: 5px solid #5ADB64;
+  border: 5px solid #4fd67d;
   border-radius: .25rem;
   overflow: auto;
 }
@@ -85,11 +86,12 @@ body.error #results {
 }
 
 #results h2 {
-  color: #121212;
-  background: #5ADB64;
+  color: #4fd67d;
   width: 100%;
   font-size: 1.4rem;
-  margin: 0;
+  margin:0;
+  padding:0;
+  margin-top: 1.5rem;
 }
 
 #results p {
@@ -162,8 +164,8 @@ body.unloaded #controls {
   text-align: left;
   list-style-position: outside;
   padding: 0;
-  background: #242424;
-  color: #5ADB64;
+  background: #303134;
+  color: #4fd67d;
   /* border: 1px #3e3f43 solid; */
   border-radius: .75rem;
 }
@@ -180,7 +182,7 @@ body.unloaded #controls {
   /* color: #5397ef; */
   font-size: 1.3rem;
   font-weight: bold;
-  border-bottom: 1px #404040 solid;
+  border-bottom: 1px #5f6368 solid;
   overflow: visible;
   position: relative;
 }
@@ -194,7 +196,7 @@ body.unloaded #controls {
 }
 
 #defeatsList li span {
-  color: #D5D8D9;
+  color: #bdc1c6;
   vertical-align: middle;
   white-space: normal;
   overflow-wrap: normal;
@@ -207,7 +209,7 @@ body.unloaded #controls {
 
 .actionText {
   font-weight: bold;
-  color: #5ADB64;
+  color: #4fd67d;
   cursor: pointer;
   display: none;
 }
@@ -260,8 +262,8 @@ body.looking #progressIndicator {
   height: 2.75rem;
   width: 2.75rem;
   border: 4px #2F3135 solid;
-  border-left-color: #5ADB64;
-  border-top-color: #5ADB64;
+  border-left-color: #4fd67d;
+  border-top-color: #4fd67d;
   border-radius: 50%;
   animation: spin 1.75s infinite linear;
   padding: 0;
@@ -294,14 +296,14 @@ button {
   cursor: pointer;
   border: none;
   border-radius: .25rem;
-  background: #5028C8;
+  background: blue;
   color: white;
   font-size: 17px;
   margin: 0 .25rem;
 }
 
 button:hover {
-  background: #381c8c;
+  background: darkblue;
 }
 
 button:disabled {
@@ -317,7 +319,14 @@ body.loaded #launchSearch,
 body.success #launchSearch,
 body.reset #launchSearch,
 body.error #launchSearch {
-  display: block;
+  display: inline-block;
+}
+
+body.looking #launchSearch {
+  display: inline-block;
+  background: #252526;
+  color: #181818;
+  cursor: default;
 }
 
 #keepLooking {
@@ -411,7 +420,7 @@ header {
   justify-content: space-evenly;
   padding: 0;
   margin: 0;
-  background: #242424;
+  background: #303134;
   min-height: 4rem;
 }
 
@@ -424,12 +433,12 @@ header {
 }
 
 a {
-  color: #8569d9;
+  color: #b6a5e8;
   word-break: break-word;
 }
 
 header span.revealTrigger {
-  color: #8569d9;
+  color: #b6a5e8;
   cursor: pointer;
   line-height: 2rem;
 }
