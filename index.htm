@@ -33,46 +33,49 @@
     </div>
   </header>
 
-  <div id=centralColumn>
-        <ul id=moreInfo class="stateB">
-          <h2>About</h2>
-          <li>Most Chess.com users have already 'defeated' the world's top player, Magnus Carlsen.
-            How so? Indirectly. By beating someone, who beat someone&hellip; who beat Magnus.
-            This site attempts to count the steps in that chain for any given user.</li>
-          <li>Not necessarily shortest path. Your true number may be lower (explained in FAQ).</li>
-          </li>
-          <li>Requires a modern browser.</li>
-          <li>No cookies or tracking.</li>
-          <li>Feedback &amp; Bug reports: contact me on <a
-              href="https://www.reddit.com/message/compose/?to=BigGuyForYou_">Reddit</a></li>
-          <li>Unofficial personal project. Not associated with Chess.com.</li>
-          <hr>
-          <h2>FAQ</h2>
-          <li>
-            <b>Why not use Dijkstra, A*, etc?</b><br>
-            Accurate pathfinding algorithms did not appear feasible,
-            because only limited data is exposed by Chess.com's Public API.
-            In particular, it is expensive to get a complete list of each player's wins.
-            Instead I only offer an "estimated" number, arrived at by my own simple algorithm.
-          </li>
-          <li><b>How does this search work?</b><br>
-            It climbs upward by finding each player's best win
-            (approximately - closest available data is 'best win from best month').
-            An alternate branch is considered at each step.
-            Meanwhile, the search also works backwards by checking each player seen against a large "end-table" (tree)
-            of direct Magnus defeaters (and their defeaters, etc, back ~3 generations).
-          </li>
-          <li> <b>Is this project open source?</b><br>
-            No. I prefer to retain sole authorship in this case.
-            It is my first completed website and I'd like to continue tinkering with it myself.
-            Anyone is of course welcome to implement the same idea.
-            The full source is inspectable on <a href="https://github.com/mw9k/magnum">
-              <i class="fa fa-github" aria-hidden="true"></i><em>&nbsp;</em>Github</a>
-          </li>
-          <hr>
-        
-        </ul>
+  <ul id=moreInfo class="stateB">
+    <h2>About</h2>
+    <li>Most Chess.com users have 'defeated' the world's top player, Magnus Carlsen.
+      How so? Indirectly. By beating someone, who beat someone&hellip; who beat Magnus.
+      This site attempts to count the steps in that chain for any given user.</li>
+    <li>Not necessarily shortest path. Your true number may be lower (explained in FAQ).</li>
+    </li>
+    <li>Requires a modern browser.</li>
+    <li>No cookies or tracking.</li>
+    <li>Feedback &amp; Bug reports: contact me on <a
+        href="https://www.reddit.com/message/compose/?to=BigGuyForYou_">Reddit</a></li>
+    <li>Unofficial personal project. Not associated with Chess.com.</li>
 
+    <hr>
+    <h2>FAQ</h2>
+    <li>
+      <b>Why not use Dijkstra, A*, etc?</b><br>
+      Accurate pathfinding algorithms did not appear feasible,
+      because only limited data is exposed by Chess.com's Public API.
+      In particular, it is expensive to get a complete list of each player's wins.
+      Instead I only offer an "estimated" number, arrived at by my own simple algorithm.
+    </li>
+    <li><b>How does this search work?</b><br>
+      It climbs upward by finding each player's best win
+      (approximately - closest available data is 'best win from best month').
+      An alternate branch is considered at each step.
+      Meanwhile, the search also works backwards by checking each player seen against a large "end-table" (tree)
+      of direct Magnus defeaters (and their defeaters, etc, back ~3 generations).
+    </li>
+    <li> <b>Is this project open source?</b><br>
+      No. I prefer to retain sole authorship for now.
+      It is my first completed website and I'd like to continue tinkering with it myself.
+      Anyone is of course welcome to implement the same idea.
+      The full source is inspectable on <a href="https://github.com/mw9k/magnum">
+        <i class="fa fa-github" aria-hidden="true"></i><em>&nbsp;</em>Github</a>
+    </li>
+    <hr>
+    <h2>Acknowledgements</h2>
+  
+  
+  </ul>
+
+  <div id=centralColumn>
     <p id=loadingCover>Loading Data<br><span class=loading>...</span></p>
 
     <div id=controls>
@@ -106,5 +109,6 @@
       </div>
     </div>
   </div>
+  <footer>By MGW, 2022</footer>
 </body>
 </html>

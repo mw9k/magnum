@@ -7,6 +7,12 @@ label {
   font-size: .9rem;
 }
 
+footer {
+  color: #707070;
+  font-size: .9rem;
+  padding: .5rem;
+}
+
 body {
   background: #1f2023;
   color: #bdc1c6;
@@ -54,6 +60,13 @@ h1 {
 h2 {
     font-size: 1.5rem;
     color: #4fd67d;
+    margin: .25rem 0;
+    /* margin-top: 1rem; */
+}
+
+hr {
+  color: rgba(255, 255, 255, 0.25);
+  margin: 1rem 0;
 }
 
 body.unloaded {
