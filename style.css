@@ -261,11 +261,11 @@ body.looking #reset, body.keepGoing #reset {
   background: #c91d1d;
 }
 
-#progressIndicator {
+#loading {
   display: none;
 }
 
-body.looking #progressIndicator {
+body.looking #loading {
   display: block;
 }
 
