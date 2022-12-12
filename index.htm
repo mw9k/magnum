@@ -49,20 +49,20 @@
     <hr>
     <h2>FAQ</h2>
     <li>
-      <b>Why not use Dijkstra, A*, etc?</b><br>
+      <h3>Why not use Dijkstra, A*, etc?</h3>
       Accurate pathfinding algorithms did not appear feasible,
       because only limited data is exposed by Chess.com's Public API.
       In particular, it is expensive to get a complete list of each player's wins.
       Instead I only offer an "estimated" number, arrived at by my own simple algorithm.
     </li>
-    <li><b>How does this search work?</b><br>
+    <li><h3>How does this search work?</h3>
       It climbs upward by finding each player's best win
       (approximately - closest available data is 'best win from best month').
       An alternate branch is considered at each step.
-      Meanwhile, the search also works backwards by checking each player seen against a large "end-table" (tree)
+      Meanwhile, the search also works backwards by checking each player seen against a large 'end-table' (tree)
       of direct Magnus defeaters (and their defeaters, etc, back ~3 generations).
     </li>
-    <li> <b>Is this project open source?</b><br>
+    <li><h3>Is this project open source?</h3>
       No. I prefer to retain sole authorship for now.
       It is my first completed website and I'd like to continue tinkering with it myself.
       Anyone is of course welcome to implement the same idea.
@@ -71,6 +71,11 @@
     </li>
     <hr>
     <h2>Acknowledgements</h2>
+    <li>Favicon <a href="https://www.favicon.cc/?action=icon&file_id=639359">
+      "rooklab-brand-color"</a> found at favicon.cc, created by user
+      sabrewolf. Licensed as: Creative Commons, no attribution.
+    </li>
+    <hr>
   
   
   </ul>
