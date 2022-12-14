@@ -128,6 +128,7 @@ body.unloaded #controls {
   align-items: center;
   animation: fadeIn .5s;
   padding: 0;
+  border: 1px dimgray solid;
 }
 
 #controls >* {
@@ -388,7 +389,6 @@ input, select {
 }
 
 .controlGroup {
-  border: 1px gray solid;
   
 }
 
@@ -432,10 +432,6 @@ input, select {
 
 header {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
   padding: .5rem 0;
   margin: 0;
   background: #303134;
@@ -444,7 +440,6 @@ header {
 
 header h3 {
   color: #949494;
-  margin: auto;
 }
 
 #moreInfo {
@@ -461,7 +456,7 @@ a {
   word-break: break-word;
 }
 
-header span.revealTrigger {
+.revealTrigger {
   color: #b6a5e8;
   cursor: pointer;
   line-height: 2rem;
