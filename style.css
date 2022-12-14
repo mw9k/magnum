@@ -2,14 +2,6 @@ html {
   font-size: 17px;
 }
 
-
-
-footer {
-  color: #707070;
-  font-size: .9rem;
-  padding: .5rem;
-}
-
 body {
   background: #1f2023;
   color: #bdc1c6;
@@ -432,10 +424,21 @@ input, select {
 
 header {
   width: 100%;
-  padding: .5rem 0;
+  padding: 0;
   margin: 0;
+  padding-top: .5rem;
   background: #303134;
   min-height: 4rem;
+}
+
+#moreInfoTrigger {
+  display: block;
+  padding: 0;
+  margin: 0;
+  margin-top: .85rem;
+  padding: .2rem;
+  border-top: 1px rgba(255,255,255,0.15) solid;
+  text-align: center;
 }
 
 header h3 {
