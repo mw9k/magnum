@@ -13,29 +13,25 @@
   <link rel="stylesheet" href="style.css?v=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&display=swap" rel="stylesheet">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
 <body class=unloaded>
   <header>
     <h1>Magnus Number Estimator</h1>
-    <div id="bottomRow">
-      <p id=moreInfoTrigger>
-        <span class="revealTrigger stateA" data-targetid="moreInfo">More Info<em>&nbsp;</em><i
-            class="fa fa-chevron-circle-down"></i></span>
-        <span class="revealTrigger stateB" data-targetid="moreInfo">Hide Info<em>&nbsp;</em><i
-            class="fa fa-chevron-circle-up"></i></span>
-      </p>
-
-    </div>
+    <h3>for Chess.com</h3>
   </header>
 
   <ul id=moreInfo class="stateB">
     <h2>About</h2>
-    <li>Most Chess.com users have 'defeated' the world's top player, Magnus Carlsen.
+    <li>Most Chess.com users have already "defeated" the world's top player, Magnus Carlsen.
       How so? Indirectly. By beating someone, who beat someone&hellip; who beat Magnus.
       This site attempts to count the steps in that chain for any given user.</li>
     <li>Not necessarily shortest path. Your true number may be lower (explained in FAQ).</li>
@@ -76,6 +72,11 @@
       sabrewolf. Licensed as: Creative Commons, no attribution.
     </li>
     <hr>
+<h2>To do</h2>
+<li>
+  all line heights same size,
+possible font change to more std, Android font etc
+</li>
   
   
   </ul>
@@ -84,18 +85,20 @@
     <p id=loadingCover>Loading Data<br><span class=loading>...</span></p>
 
     <div id=controls>
-      <p>
-        <label for="uName">Chess.com Username:</label>
-        <input type="text" id="uName" name="uName">
-      </p>
-      <p>
-        <label for="timeClass">Time Control:</label>
-        <select name="timeClass" id="timeClass">
-          <option value="rapid">Rapid</option>
-          <option value="blitz" selected>Blitz</option>
-          <option value="bullet">Bullet</option>
-        </select>
-      </p>
+      <div class=controlGroup>
+        <p id=controlsRow1>
+          <label for="uName">Username:</label>
+          <input type="text" id="uName" name="uName">
+        </p>
+        <p id=controlsRow2>
+          <label for="timeClass">Time Control:</label>
+          <select name="timeClass" id="timeClass">
+            <option value="rapid">Rapid</option>
+            <option value="blitz" selected>Blitz</option>
+            <option value="bullet">Bullet</option>
+          </select>
+        </p>
+      </div>
       <p>
         <button type="button" id="launchSearch">Search</button>
         <button type="button" id="keepLooking">Keep Looking&hellip;</button>
@@ -114,6 +117,14 @@
       </div>
     </div>
   </div>
-  <footer>By MGW, 2022</footer>
+  <footer>
+    By MGW, 2022 |
+    <span id=moreInfoTrigger>
+      <span class="revealTrigger stateA" data-targetid="moreInfo">More Info<em>&nbsp;</em><i
+          class="fa fa-chevron-circle-down"></i></span>
+      <span class="revealTrigger stateB" data-targetid="moreInfo">Hide Info<em>&nbsp;</em><i
+          class="fa fa-chevron-circle-up"></i></span>
+      </span>
+  </footer>
 </body>
 </html>

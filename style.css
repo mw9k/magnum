@@ -2,10 +2,7 @@ html {
   font-size: 17px;
 }
 
-label {
-  color: #949494;
-  font-size: .9rem;
-}
+
 
 footer {
   color: #707070;
@@ -17,7 +14,9 @@ body {
   background: #1f2023;
   color: #bdc1c6;
   cursor: auto;
+  font-family: 'Roboto', sans-serif;
   font-family: 'Istok Web', sans-serif;
+  line-height: 1.5;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -52,15 +51,15 @@ h1 {
   font-size: 1.6rem;
   font-weight: 600;
   display: block;
-  padding: .4rem 0;
   white-space: nowrap;
   margin: 0;
+  padding: 0;
 }
 
 h2 {
-    font-size: 1.5rem;
-    color: #4fd67d;
-    margin: .25rem 0;
+  font-size: 1.5rem;
+  color: #4fd67d;
+  margin: .25rem 0;
 }
 
 h3 {
@@ -115,7 +114,6 @@ body.error #results {
 
 #results p {
   margin: 1.5rem;
-  line-height: 1.75rem;
 }
 
 
@@ -145,7 +143,6 @@ body.unloaded #controls {
   animation: loadingAnim 1.1s infinite;
   animation-timing-function: ease;
   font-size: 1.75rem;
-  line-height: .5rem;
 }
 
 @keyframes loadingAnim {
@@ -195,7 +192,6 @@ body.unloaded #controls {
   margin: 0 .75rem;
   padding: 2rem .25rem;
   animation: fadeIn .5s;
-  line-height: 105%;
   list-style-position: inside;
   white-space: nowrap;
   /* color: #5397ef; */
@@ -371,6 +367,15 @@ button#stopSearch:hover {
   background: #d82b2b;
 }
 
+label {
+  color: #949494;
+  font-size: .9rem;
+  width: 50%;
+  display: inline-block;
+  padding: 0;
+  text-align: right;
+}
+
 input, select {
   background-color: #000;
   color: white;
@@ -378,10 +383,23 @@ input, select {
   border:1px #2a2a2a solid;
   margin-left: .3rem;
   font-size: 16px;
+  width: 50%;
+  display: inline;
 }
 
-#uName {
-    width: 6rem;
+.controlGroup {
+  border: 1px gray solid;
+  
+}
+
+#controlsRow1 {
+  width: 18rem;
+  white-space: nowrap;
+}
+
+#controlsRow2 {
+  width: 15rem;
+  white-space: nowrap;
 }
 
 .stateA {
@@ -411,23 +429,6 @@ input, select {
         
 }
 
-header #bottomRow >* {
-  white-space: nowrap;
-  margin: 0;
-  padding: 0 1.25rem;
-}
-
-
-#bottomRow {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  align-items: baseline;
-  justify-content: center;
-  min-height: 2.5rem;
-  line-height: 2.5rem;
-}
-
 
 header {
   width: 100%;
@@ -435,10 +436,15 @@ header {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  padding: 0;
+  padding: .5rem 0;
   margin: 0;
   background: #303134;
   min-height: 4rem;
+}
+
+header h3 {
+  color: #949494;
+  margin: auto;
 }
 
 #moreInfo {
