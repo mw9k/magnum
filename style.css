@@ -106,32 +106,12 @@ body.error #results {
 
 #results p {
   margin: 1.5rem;
+  margin-top: 1rem;
 }
 
 
 body.unloaded #controls {
   display: none;
-}
-
-#controls {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  row-gap: 0;
-  align-items: center;
-  animation: fadeIn .5s;
-  padding: 1rem;
-  border: 1px dimgray solid;
-  border-radius: .25rem;
-}
-
-#controls>* {
-  margin: 0;
-  margin-top: 1rem;
-}
-
-#controls>*:first-child {
-  margin-top: 0;
 }
 
 .loading {
@@ -155,14 +135,13 @@ body.unloaded #controls {
   align-items: center;
   max-width: 80vw;
   margin: 0;
-  padding: 1rem;
+  padding-bottom: 5rem;
 }
 
 #centralColumn>* {
-  margin: 1rem 0;
+  margin-top: 3rem;
   /* for debugging... */
   /* outline: 1px lime solid; */
-  /* background: red !important;   */
 }
 
 #defeatsList:empty {
@@ -179,11 +158,10 @@ body.unloaded #controls {
   color: #4fd67d;
   /* border: 1px #3e3f43 solid; */
   border-radius: .75rem;
+  margin-bottom: 0;
 }
 
 #defeatsList li {
-  /* outline: 2px #242630 solid; */
-  /* border-left: 8px #2E2E2E solid; */
   margin: 0 .75rem;
   padding: 2rem .25rem;
   animation: fadeIn .5s;
@@ -206,12 +184,12 @@ body.unloaded #controls {
 }
 
 #defeatsList li span {
-  color: #bdc1c6;
+  color: #bdc1c6
   vertical-align: middle;
   white-space: normal;
   overflow-wrap: normal;
   display: inline-block;
-  font-size: 17px;
+  font-size: 1rem;
   font-weight: normal;
   /* margin-left: .25rem; */
   margin-right: 1.2rem;  /* for more sensitive wrap */
@@ -222,16 +200,8 @@ body.unloaded #controls {
   color: #4fd67d;
   cursor: pointer;
   display: none;
-}
-
-.actionText.big {
   font-size: 1.2rem;
 }
-
-.actionText:hover {
-  text-decoration: underline;
-}
-
 
 #keepLooking2 {
   display: none;
@@ -287,6 +257,7 @@ body.looking #loading {
 
 body.success #viewResults {
   display: block;
+  margin-bottom: 0;
 }
 
 .errMsg {
@@ -306,7 +277,7 @@ button {
   cursor: pointer;
   border: none;
   border-radius: .25rem;
-  background: #2020df;
+  background: #2A2ABF;
   color: white;
   font-size: 17px;
   margin: 0 .25rem;
@@ -334,8 +305,8 @@ body.error #launchSearch {
 
 body.looking #launchSearch {
   display: inline-block;
-  background: #252526;
-  color: #181818;
+  background: #303134;
+  color: #191a1c;
   cursor: default;
 }
 
@@ -364,8 +335,8 @@ button#stopSearch:hover {
 
 label {
   color: #949494;
-  font-size: .9rem;
-  min-width: 8em;
+  /* font-size: .9rem; */
+  /* min-width: 8em; */
   display: inline-block;
   padding: 0;
   text-align: right;
@@ -375,24 +346,43 @@ input, select {
   background-color: #000;
   color: white;
   padding: .4rem;
-  border:1px #2a2a2a solid;
+  border: 1px #2a2a2a solid;
   margin-left: .3rem;
   font-size: 16px;
-  /* width: 50%; */
   display: inline;
-}
-
-input#uName {
-  width: 10em;
+  width: 9rem;
+  /* To make equal width... */
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; 
 }
 
 .controlsRow {
-  text-align: left;
+  text-align: right;
   width: 100%;
   white-space: nowrap;
   padding: 0;
 }
 
+#controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeIn .5s;
+  padding: 1.5rem 2rem;
+  border: 1px dimgray solid;
+  border-radius: .2rem;
+}
+
+#controls>* {
+  margin: 0;
+  margin-top: 1.25rem;
+}
+
+#controls>*:first-child {
+  margin-top: 0;
+}
 
 .stateA {
   display: initial;
