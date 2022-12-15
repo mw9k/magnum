@@ -116,19 +116,21 @@ body.unloaded #controls {
 #controls {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
+  row-gap: 0;
   align-items: center;
   animation: fadeIn .5s;
-  padding: 0;
+  padding: 1rem;
   border: 1px dimgray solid;
+  border-radius: .25rem;
 }
 
-#controls >* {
+#controls>* {
   margin: 0;
   margin-top: 1rem;
 }
 
-#controls >*:first-child {
+#controls>*:first-child {
   margin-top: 0;
 }
 
@@ -363,7 +365,7 @@ button#stopSearch:hover {
 label {
   color: #949494;
   font-size: .9rem;
-  width: 50%;
+  min-width: 8em;
   display: inline-block;
   padding: 0;
   text-align: right;
@@ -376,23 +378,21 @@ input, select {
   border:1px #2a2a2a solid;
   margin-left: .3rem;
   font-size: 16px;
-  width: 50%;
+  /* width: 50%; */
   display: inline;
 }
 
-.controlGroup {
-  
+input#uName {
+  width: 10em;
 }
 
-#controlsRow1 {
-  width: 18rem;
+.controlsRow {
+  text-align: left;
+  width: 100%;
   white-space: nowrap;
+  padding: 0;
 }
 
-#controlsRow2 {
-  width: 15rem;
-  white-space: nowrap;
-}
 
 .stateA {
   display: initial;
@@ -440,6 +440,10 @@ header {
   border-top: 1px rgba(255,255,255,0.15) solid;
   text-align: center;
   color: #949494;
+}
+
+#moreInfoTrigger span {
+  margin: 0 .5rem;  /* spacing between header links */
 }
 
 header h3 {

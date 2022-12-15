@@ -28,7 +28,7 @@
     <h1>Magnus Number Estimator</h1>
     <h3>for Chess.com</h3>
     <span id=moreInfoTrigger>
-      By MGW 2022&nbsp;&nbsp;|&nbsp;&nbsp;
+      <span>By MGW 2022</span> |
       <span class="revealTrigger stateA" data-targetid="moreInfo">More Info<em>&nbsp;</em><i
           class="fa fa-chevron-circle-down"></i></span>
       <span class="revealTrigger stateB" data-targetid="moreInfo">Hide Info<em>&nbsp;</em><i
@@ -85,20 +85,18 @@
     <p id=loadingCover>Loading Data<br><span class=loading>...</span></p>
 
     <div id=controls>
-      <div class=controlGroup>
-        <p id=controlsRow1>
-          <label for="uName">Username:</label>
-          <input type="text" id="uName" name="uName">
-        </p>
-        <p id=controlsRow2>
-          <label for="timeClass">Time Control:</label>
-          <select name="timeClass" id="timeClass">
-            <option value="rapid">Rapid</option>
-            <option value="blitz" selected>Blitz</option>
-            <option value="bullet">Bullet</option>
-          </select>
-        </p>
-      </div>
+      <p class="controlsRow">
+        <label for="uName">Username:</label>
+        <input type="text" id="uName" name="uName">
+      </p>
+      <p class="controlsRow">
+        <label for="timeClass">Time Control:</label>
+        <select name="timeClass" id="timeClass">
+          <option value="rapid">Rapid</option>
+          <option value="blitz" selected>Blitz</option>
+          <option value="bullet">Bullet</option>
+        </select>
+      </p>
       <p>
         <button type="button" id="launchSearch">Search</button>
         <button type="button" id="keepLooking">Keep Looking&hellip;</button>
