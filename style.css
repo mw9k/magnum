@@ -6,7 +6,6 @@ body {
   background: #1f2023;
   color: #bdc1c6;
   cursor: auto;
-  font-family: 'Roboto', sans-serif;
   font-family: 'Istok Web', sans-serif;
   line-height: 1.5;
   text-align: center;
@@ -133,7 +132,7 @@ body.unloaded #controls {
   flex-direction: column;
   justify-content: flex-start;  /* Non-jumpy w/ dynamic loading */
   align-items: center;
-  max-width: 80vw;
+  max-width: 88vw;
   margin: 0;
   padding-bottom: 5rem;
 }
@@ -184,7 +183,7 @@ body.unloaded #controls {
 }
 
 #defeatsList li span {
-  color: #bdc1c6
+  color: #bdc1c6;
   vertical-align: middle;
   white-space: normal;
   overflow-wrap: normal;
@@ -279,7 +278,8 @@ button {
   border-radius: .25rem;
   background: #2A2ABF;
   color: white;
-  font-size: 17px;
+  font-size: 1rem;
+  font-family: 'Istok Web', sans-serif;
   margin: 0 .25rem;
 }
 
@@ -348,9 +348,10 @@ input, select {
   padding: .4rem;
   border: 1px #2a2a2a solid;
   margin-left: .3rem;
-  font-size: 16px;
   display: inline;
   width: 9rem;
+  font-size: 1rem;
+    font-family: 'Istok Web', sans-serif;
   /* To make equal width... */
   -moz-box-sizing: border-box; 
   -webkit-box-sizing: border-box;
