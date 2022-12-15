@@ -54,12 +54,11 @@
       In particular, it is expensive to get a complete list of each player's wins.
       Instead I only offer an "estimated" number, arrived at by my own simple algorithm.
     </li>
-    <li><h3>How does this search work?</h3>
-      It climbs upward by finding each player's best win
-      (approximately - closest available data is 'best win from best month').
+    <li><h3>How does the search work?</h3>
+      It climbs upward by finding each user's (approximate) best win.
       An alternate branch is considered at each step.
-      Meanwhile, the search also works backwards by checking each player seen against a large 'end-table' (tree)
-      of direct Magnus defeaters (and their defeaters, etc, back ~3 generations).
+      Meanwhile, it also works backward by checking each player seen against a 
+      hard-coded tree containing the last 2-3 generations of direct Magnus defeaters.
     </li>
     <li><h3>Is this project open source?</h3>
       No. I prefer to retain sole authorship for now.
