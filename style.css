@@ -169,7 +169,7 @@ body.unloaded #controls {
   /* color: #5397ef; */
   font-size: 1.3rem;
   font-weight: bold;
-  border-bottom: 1px #5f6368 solid;
+  border-bottom: 1px rgba(255, 255, 255, 0.25) solid;
   overflow: visible;
   position: relative;
 }
@@ -372,7 +372,7 @@ input, select {
   align-items: center;
   animation: fadeIn .5s;
   padding: 1.5rem 2rem;
-  border: 1px dimgray solid;
+  border: 1px rgba(255, 255, 255, 0.3) solid;
   border-radius: .2rem;
 }
 
@@ -428,7 +428,7 @@ header {
   margin: 0;
   margin-top: .85rem;
   padding: .2rem;
-  border-top: 1px rgba(255,255,255,0.15) solid;
+  border-top: 1px rgba(255,255,255,0.2) solid;
   text-align: center;
   color: #949494;
 }
