@@ -72,7 +72,7 @@ document.addEventListener("click", function(e) {
 			el("loading").scrollIntoView({ behavior: "smooth", block: "center" });
 		}
 	} else if (e.target.id == "viewResults") {
-		el("results").scrollIntoView({behavior:"smooth", block:"center"});
+		document.body.scrollIntoView({ behavior: "smooth", block:"end"});
 	} else if (e.target.id == "reset") {
 		glb.cancelled = true;
 		if (!glb.currentlyLooking) clearSearch();
