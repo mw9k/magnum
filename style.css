@@ -4,7 +4,7 @@ html {
 
 body {
   background: #282828;
-  color: whitesmoke;
+  color: #F0F0F0;
   cursor: auto;
   font-family: 'Istok Web', sans-serif;
   line-height: 1.5;
@@ -95,7 +95,6 @@ body.error #results {
 }
 
 #results h2 {
-  color: #4fd67d;
   width: 100%;
   font-size: 1.4rem;
   margin:0;
@@ -183,7 +182,7 @@ body.unloaded #controls {
 }
 
 #defeatsList li span {
-  color: whitesmoke;
+  color: #F0F0F0;
   vertical-align: middle;
   white-space: normal;
   overflow-wrap: normal;
@@ -430,7 +429,7 @@ header {
   padding: .2rem;
   border-top: 1px rgba(255,255,255,0.2) solid;
   text-align: center;
-  color: #949494;
+  color: #A8A8A8;
 }
 
 #moreInfoTrigger span {
@@ -438,7 +437,7 @@ header {
 }
 
 header h3 {
-  color: #949494;
+  color: #A8A8A8;
 }
 
 #moreInfo {
