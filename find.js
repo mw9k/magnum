@@ -76,6 +76,10 @@ document.addEventListener("click", function(e) {
 	} else if (e.target.id == "reset") {
 		glb.cancelled = true;
 		if (!glb.currentlyLooking) clearSearch();
+	} else if (e.target.id == "faqLink") {
+		el("moreInfoTrigger").classList.add("shown");
+		el("moreInfo").classList.add("shown");
+		el("moreInfo").scrollIntoView({ behavior: "smooth", block: "start" });
 	} else if (e.target.classList.contains("revealTrigger")) {
 		let targetElem = el(e.target.dataset.targetid);
 		e.target.parentNode.classList.toggle("shown");
@@ -85,7 +89,7 @@ document.addEventListener("click", function(e) {
 
 window.addEventListener("keyup", (event) => {
 	if (event.key == "Enter" && !glb.currentlyLooking) {
-		if (el("keepLooking").style.visibility == "visible" ||
+		if (document.body.classList.contains("keepGoing") ||
         event.target.id == "uName") {
 			runSearch();
 		}
@@ -369,7 +373,7 @@ function showResults(msg) {
 	<b>${glb.defeatsChain.length} ${glb.chosenTime} win${plural1}</b>
 	separate${plural2} ${glb.defeatsChain[0]} from MagnusCarlsen.`;
 	
-  el("results").innerHTML = msg;
+  el("resultsText").innerHTML = msg;
 }
 
 
@@ -377,5 +381,5 @@ function displayError(msg) {
 	clearSearch();
   setState("error");
   let heading = `<h2><i class="fa fa-exclamation-triangle"></i></h2>`;
-  el("results").innerHTML = `${heading}<p>${msg}</p>`;
+	el("resultsText").innerHTML = `${heading}<p>${msg}</p>`;
 }

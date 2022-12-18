@@ -77,6 +77,15 @@ body.unloaded #loadingCover {
   display: none;
 }
 
+#disclaimer {
+  display:none;
+}
+
+body.success #disclaimer {
+  display: block;
+}
+
+
 body.success #results,
 body.error #results {
   display: block;
@@ -287,8 +296,8 @@ button:hover {
 }
 
 button:disabled {
-  background: lightgray;
-  color: gray;
+  background: #383838;
+  color: #282828;
 }
 
 #launchSearch {
@@ -304,8 +313,8 @@ body.error #launchSearch {
 
 body.looking #launchSearch {
   display: inline-block;
-  background: #303134;
-  color: #191a1c;
+  background: #383838;
+  color: #282828;
   cursor: default;
 }
 
@@ -356,6 +365,19 @@ input, select {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; 
 }
+
+input:focus,
+select:focus {
+  border: 1px orange solid;
+  background-color: #000;
+}
+
+input:focus-within,
+input:focus-visible
+{
+  background-color: #000;
+}
+
 
 .controlsRow {
   text-align: right;
@@ -430,6 +452,7 @@ header {
   border-top: 1px rgba(255,255,255,0.2) solid;
   text-align: center;
   color: #A8A8A8;
+  line-height: 2rem;
 }
 
 #moreInfoTrigger span {
@@ -457,5 +480,11 @@ a {
 .revealTrigger {
   color: #8cb4ff;
   cursor: pointer;
-  line-height: 2rem;
+}
+
+#disclaimerText.shown {
+  display: inline-block;
+  font-size: .9;
+  border-top: 1px rgba(255, 255, 255, 0.25) solid;
+  padding-top: 1rem;
 }

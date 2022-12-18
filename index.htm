@@ -35,7 +35,7 @@
   <ul id=moreInfo class="stateB">
     <h2>About</h2>
     <li>Most Chess.com users have already "defeated" the world's top player, Magnus Carlsen.
-      How so? Indirectly. By beating someone, who beat someone&hellip; who beat Magnus.
+      How? Indirectly. By beating someone, who beat someone&hellip; who beat Magnus.
       This site attempts to count the steps in that chain for any given user.</li>
     <li>Not necessarily shortest path. Your true number may be lower (explained in FAQ).</li>
     </li>
@@ -99,17 +99,29 @@
       </p>
     </div>
     <p id=viewResults class="actionText">View Results<em>&nbsp;</em><i class="fa fa-chevron-down"></i></p>
-
     <ol reversed id=defeatsList></ol>
-    <div id=results></div>
+    <div id=results>
+      <span id=resultsText></span>
+      <p id=disclaimer>
+        <span class="revealTrigger stateA" data-targetid="disclaimerText">* Disclaimer<em>&nbsp;</em><i
+            class="fa fa-chevron-circle-down"></i></span>
+        <span class="revealTrigger stateB" data-targetid="disclaimerText">* Disclaimer<em>&nbsp;</em><i
+            class="fa fa-chevron-circle-up"></i></span>
+        </span>
+        <span id=disclaimerText class="stateB">
+          Not necessarily shortest path. Your true number might be lower.
+          This  estimate is based on limited data exposed by Chess.com API.
+          <span id=faqLink class=revealTrigger>See FAQ</span>
+          for more details.
+          </span>
+        </span>
+      </p>
+    </div>
     <button type="button" id=keepLooking2>Keep Looking&hellip;</button>
     <div id=loading>
       <div class=loadingSpin></div>
       <p id=searchText>Searching&hellip;</p>
     </div>
   </div>
-  <footer>
-    
-  </footer>
 </body>
 </html>
