@@ -79,7 +79,6 @@ document.addEventListener("click", function(e) {
 	} else if (e.target.id == "faqLink") {
 		el("moreInfoTrigger").classList.add("shown");
 		el("moreInfo").classList.add("shown");
-		el("moreInfo").scrollIntoView({ behavior: "smooth", block: "start" });
 	} else if (e.target.classList.contains("revealTrigger")) {
 		let targetElem = el(e.target.dataset.targetid);
 		e.target.parentNode.classList.toggle("shown");

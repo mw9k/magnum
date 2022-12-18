@@ -485,6 +485,10 @@ a {
 #disclaimerText.shown {
   display: inline-block;
   font-size: .9;
+  padding-top: 1rem;
+}
+
+#disclaimer {
   border-top: 1px rgba(255, 255, 255, 0.25) solid;
   padding-top: 1rem;
 }
