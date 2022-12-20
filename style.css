@@ -121,17 +121,48 @@ body.unloaded #controls {
   display: none;
 }
 
-.loading {
-  animation: loadingAnim 1.1s infinite;
-  animation-timing-function: ease;
-  font-size: 1.75rem;
+
+.loadingBar {
+  display: none;
 }
 
-@keyframes loadingAnim {
-  0%   {letter-spacing: 0;}
-  50% {letter-spacing: .3rem;}
-  100%   {letter-spacing: 0;}
+body.unloaded .loadingBar {
+  display: block;
+  width: 150px;
+  height: 6px;
+  background-color: #181818;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  margin: 1.25rem;
 }
+
+.loadingBar::after {
+  position:absolute;
+  display: block;
+  content:"";
+  bottom:0;
+  right: 0;
+  height:100%;
+  width:75px;
+  background: #4fd67d;
+  outline: 1px #4fd67d solid;
+  z-index: 1;
+  animation: scroll .7s infinite linear, stretch 2s infinite linear;
+  margin: 0;
+}
+
+@keyframes scroll {
+  0%   {right: 100%;}
+  100%   {right: -50%;}
+}
+
+@keyframes stretch {
+  0%   {outline-width: 20px;}
+  50%   {outline-width: 0;}
+  100%   {outline-width: 20px;}
+}
+
 
 #centralColumn {
   flex-grow: 1;
