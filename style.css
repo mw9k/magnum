@@ -129,8 +129,9 @@ body.unloaded #controls {
 body.unloaded .loadingBar {
   display: block;
   width: 150px;
-  height: 6px;
+  height: 5px;
   background-color: #181818;
+  border-radius: 2px;
   position: relative;
   z-index: 0;
   overflow: hidden;
@@ -144,11 +145,11 @@ body.unloaded .loadingBar {
   bottom:0;
   right: 0;
   height:100%;
-  width:75px;
+  width:65px;
   background: #4fd67d;
   outline: 1px #4fd67d solid;
   z-index: 1;
-  animation: scroll .7s infinite linear, stretch 2s infinite linear;
+  animation: scroll 1s infinite linear, stretch 2.5s infinite linear;
   margin: 0;
 }
 
