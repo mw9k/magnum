@@ -87,7 +87,7 @@ document.addEventListener("click", function(e) {
 	} else if (e.target.id == "reset") {
 		glb.cancelled = true;
 		if (!glb.currentlyLooking) clearSearch();
-	} else if (e.target.classList.contains("revealTrigger")) {
+	} else if (e.target.classList && e.target.classList.contains("revealTrigger")) {
 		let targetElem = el(e.target.dataset.targetId);
 		let triggerElem = el(e.target.dataset.triggerId) || e.target.parentNode;
 		if (e.target.hasAttribute("data-always-show")) {
