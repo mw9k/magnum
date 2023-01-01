@@ -24,10 +24,9 @@
     <h1>Magnus Number Estimator</h1>
     <h3>for Chess.com</h3>
     <span id=moreInfoTrigger>
-      <span>By MGW 2022</span> |
-      <span class="revealTrigger stateA" data-targetid="moreInfo">More Info<em>&nbsp;</em><i
+      <span class="revealTrigger stateA" data-target-id="moreInfo">More Info<em>&nbsp;</em><i
           class="fa fa-chevron-circle-down"></i></span>
-      <span class="revealTrigger stateB" data-targetid="moreInfo">Hide Info<em>&nbsp;</em><i
+      <span class="revealTrigger stateB" data-target-id="moreInfo">Hide Info<em>&nbsp;</em><i
           class="fa fa-chevron-circle-up"></i></span>
     </span>
   </header>
@@ -97,21 +96,24 @@
         <button type="button" id="keepLooking">Keep Looking&hellip;</button>
         <button type="button" id="reset"><i class="fa fa-times-circle"></i></Button>
       </p>
+      <p id=viewResults class="actionText">View Results<em>&nbsp;</em><i class="fa fa-chevron-down"></i></p>
     </div>
-    <p id=viewResults class="actionText">View Results<em>&nbsp;</em><i class="fa fa-chevron-down"></i></p>
     <ol reversed id=defeatsList></ol>
     <div id=results>
       <span id=resultsText></span>
       <p id=disclaimer>
-        <span class="revealTrigger stateA" data-targetid="disclaimerText">Disclaimer<em>&nbsp;</em><i
+        <span class="revealTrigger stateA" data-target-id="disclaimerText">Disclaimer<em>&nbsp;</em><i
             class="fa fa-chevron-circle-down"></i></span>
-        <span class="revealTrigger stateB" data-targetid="disclaimerText">Disclaimer<em>&nbsp;</em><i
+        <span class="revealTrigger stateB" data-target-id="disclaimerText">Disclaimer<em>&nbsp;</em><i
             class="fa fa-chevron-circle-up"></i></span>
         </span>
         <span id=disclaimerText class="stateB">
           Not necessarily shortest path. Your true number might be lower.
           This  estimate is based on limited data exposed by Chess.com API.
-          <a href="#faq" id=faqLink>See FAQ</a>
+          <a href="#faq" id=faqLink class="revealTrigger" data-target-id="moreInfo"
+              data-always-show  data-trigger-id="moreInfoTrigger">
+            See FAQ
+          </a>
           for more details.
           </span>
         </span>

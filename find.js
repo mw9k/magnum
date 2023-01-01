@@ -42,7 +42,18 @@ window.addEventListener("load", (event) => {
 			clearInterval(interval);
 		}
 	}, 100);
+
+	// Add listeners to reset interface after search completes
+	el("uName").addEventListener('input', function(e){resetInterface(e)});
+	el("uName").addEventListener('focus', function(e){resetInterface(e)});
+	el("timeClass").addEventListener('input', function(e){resetInterface(e)});
+	el("timeClass").addEventListener('focus', function(e){resetInterface(e)});
+
 });
+
+function resetInterface(e) {
+	if (document.body.classList.contains("success")) setState("loaded");
+}
 
 
 async function loadData() {
@@ -76,13 +87,16 @@ document.addEventListener("click", function(e) {
 	} else if (e.target.id == "reset") {
 		glb.cancelled = true;
 		if (!glb.currentlyLooking) clearSearch();
-	} else if (e.target.id == "faqLink") {
-		el("moreInfoTrigger").classList.add("shown");
-		el("moreInfo").classList.add("shown");
 	} else if (e.target.classList.contains("revealTrigger")) {
-		let targetElem = el(e.target.dataset.targetid);
-		e.target.parentNode.classList.toggle("shown");
-		targetElem.classList.toggle("shown");
+		let targetElem = el(e.target.dataset.targetId);
+		let triggerElem = el(e.target.dataset.triggerId) || e.target.parentNode;
+		if (e.target.hasAttribute("data-always-show")) {
+			targetElem.classList.add("shown");
+			triggerElem.classList.add("shown");
+		} else {
+			targetElem.classList.toggle("shown");
+			triggerElem.classList.toggle("shown");
+		}
 	}
 });
 
@@ -94,7 +108,6 @@ window.addEventListener("keyup", (event) => {
 		}
 	}
 });
-
 
 async function runSearch() {
 	if (glb.currentlyLooking || !glb.endTable || glb.endTable == "error") {
