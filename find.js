@@ -48,7 +48,6 @@ window.addEventListener("load", (event) => {
 	el("uName").addEventListener('focus', function(e){resetInterface(e)});
 	el("timeClass").addEventListener('input', function(e){resetInterface(e)});
 	el("timeClass").addEventListener('focus', function(e){resetInterface(e)});
-
 });
 
 function resetInterface(e) {

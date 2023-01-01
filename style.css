@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  background: #282828;
+  background: #242527;
   color: #F0F0F0;
   cursor: auto;
   font-family: 'Istok Web', sans-serif;
@@ -101,7 +101,6 @@ body.error #results {
 }
 
 #results {
-  max-width: 26rem;
   display: none;
 }
 
@@ -114,6 +113,7 @@ body.error #results {
 }
 
 #results p {
+  max-width: 26rem;
   margin: 1.5rem;
   margin-top: 1rem;
 }
@@ -195,7 +195,7 @@ body.unloaded .loadingBar {
   text-align: left;
   list-style-position: outside;
   padding: 0;
-  background: #383838;
+  background: #333436;
   color: #4fd67d;
   /* border: 1px #3e3f43 solid; */
   border-radius: .75rem;
@@ -317,7 +317,7 @@ button {
   cursor: pointer;
   border: none;
   border-radius: .25rem;
-  background: #0236E3;
+  background: #0e639c;
   color: white;
   font-size: 1rem;
   font-family: 'Istok Web', sans-serif;
@@ -329,8 +329,8 @@ button:hover {
 }
 
 button:disabled {
-  background: #383838;
-  color: #282828;
+  background: #333436;
+  color: #242527;
 }
 
 #launchSearch {
@@ -345,8 +345,8 @@ body.error #launchSearch {
 
 body.looking #launchSearch {
   display: inline-block;
-  background: #383838;
-  color: #282828;
+  background: #333436;
+  color: #242527;
   cursor: default;
 }
 
@@ -375,11 +375,11 @@ button#stopSearch:hover {
 
 label {
   color: lightgray;
-  /* font-size: .9rem; */
-  /* min-width: 8em; */
+  min-width: 9rem;
   display: inline-block;
   padding: 0;
   text-align: right;
+  margin-left: -3rem;;
 }
 
 input, select {
@@ -391,7 +391,7 @@ input, select {
   display: inline;
   width: 9rem;
   font-size: 1rem;
-    font-family: 'Istok Web', sans-serif;
+  font-family: 'Istok Web', sans-serif;
   /* To make equal width... */
   -moz-box-sizing: border-box; 
   -webkit-box-sizing: border-box;
@@ -412,7 +412,7 @@ input:focus-visible
 
 
 .controlsRow {
-  text-align: right;
+  text-align: center;
   width: 100%;
   white-space: nowrap;
   padding: 0;
@@ -427,6 +427,7 @@ input:focus-visible
   padding: 1.5rem 2rem;
   border: 1px rgba(255, 255, 255, 0.3) solid;
   border-radius: .2rem;
+  width: 100%;
   /* min-width: 23rem; */
 }
 
@@ -473,7 +474,7 @@ header {
   padding: 0;
   margin: 0;
   padding-top: .5rem;
-  background: #383838;
+  background: #333436;
   min-height: 4rem;
 }
 
