@@ -78,17 +78,19 @@
     <div id=loadingCover>Loading Data<div class=loadingBar></div></div>
 
     <div id=controls>
-      <p class="controlsRow">
-        <label for="uName">Username:</label>
-        <input type="text" id="uName" name="uName">
-      </p>
-      <p class="controlsRow">
-        <label for="timeClass">Time Control:</label>
-        <select name="timeClass" id="timeClass">
-          <option value="rapid">Rapid</option>
-          <option value="blitz" selected>Blitz</option>
-          <option value="bullet">Bullet</option>
-        </select>
+      <p id="controlBlock">
+        <span>
+          <label for="uName">Username:</label>
+          <input type="text" id="uName" name="uName">
+        </span>
+        <span>
+          <label for="timeClass">Time Control:</label>
+          <select name="timeClass" id="timeClass">
+            <option value="rapid">Rapid</option>
+            <option value="blitz" selected>Blitz</option>
+            <option value="bullet">Bullet</option>
+          </select>
+        </span>
       </p>
       <p>
         <button type="button" id="launchSearch">Search</button>

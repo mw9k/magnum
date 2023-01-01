@@ -375,11 +375,9 @@ button#stopSearch:hover {
 
 label {
   color: lightgray;
-  min-width: 9rem;
   display: inline-block;
   padding: 0;
   text-align: right;
-  margin-left: -3rem;;
 }
 
 input, select {
@@ -411,11 +409,15 @@ input:focus-visible
 }
 
 
-.controlsRow {
-  text-align: center;
-  width: 100%;
+#controlBlock {
+  text-align: right;
   white-space: nowrap;
   padding: 0;
+}
+
+#controlBlock span {
+  margin-top: 1.4rem;
+  display: block;
 }
 
 #controls {
@@ -424,20 +426,21 @@ input:focus-visible
   justify-content: space-between;
   align-items: center;
   animation: fadeIn .5s;
-  padding: 1.5rem 2rem;
+  padding: 2.25rem 2.75rem;
   border: 1px rgba(255, 255, 255, 0.3) solid;
   border-radius: .2rem;
-  width: 100%;
+  /* width: 100%; */
   /* min-width: 23rem; */
 }
 
 #controls>* {
   margin: 0;
-  margin-top: 1.25rem;
+  margin-top: 1.4rem;
   /* border:1px yellow solid; */
 }
 
-#controls>*:first-child {
+#controls>*:first-child, 
+#controlBlock>*:first-child {
   margin-top: 0;
 }
 
