@@ -87,10 +87,6 @@ body.success #disclaimer {
   display: block;
 }
 
-#resultsText {
-    border-bottom: 1px rgba(255, 255, 255, 0.25) solid;
-}
-
 body.success #results,
 body.error #results {
   display: flex;
@@ -99,10 +95,11 @@ body.error #results {
   animation: fadeIn .5s;
   text-align: center;
   overflow: hidden;
-  width: calc(100% - 20px); /* shrink by border size */
+  width: calc(100% - 20px - 3rem); /* shrink by border size + padding */
   border: 5px solid #4fd67d;
   border-radius: .25rem;
   overflow: auto;
+  padding: 1.5rem;
 }
 
 #results {
@@ -114,15 +111,15 @@ body.error #results {
   font-size: 1.4rem;
   margin:0;
   padding:0;
-  margin-top: 1.5rem;
 }
 
 #results p {
   max-width: 26rem;
-  margin: 1.5rem;
-  margin-top: 1rem;
 }
 
+#results hr {
+  margin: .75rem 0;
+}
 
 body.unloaded #controls {
   display: none;
@@ -528,9 +525,8 @@ a {
 #disclaimerText.shown {
   display: inline-block;
   font-size: .9;
-  padding-top: 1rem;
 }
 
-#disclaimer {
-  padding-top: 1rem;
-} 
+p#disclaimerText {
+  margin-bottom: 4.5rem;
+}
