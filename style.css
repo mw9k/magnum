@@ -87,14 +87,19 @@ body.success #disclaimer {
   display: block;
 }
 
+#resultsText {
+    border-bottom: 1px rgba(255, 255, 255, 0.25) solid;
+}
 
 body.success #results,
 body.error #results {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   animation: fadeIn .5s;
   text-align: center;
   overflow: hidden;
-  width: calc(100% - 10px); /* shrink by border size */
+  width: calc(100% - 20px); /* shrink by border size */
   border: 5px solid #4fd67d;
   border-radius: .25rem;
   overflow: auto;
@@ -527,6 +532,5 @@ a {
 }
 
 #disclaimer {
-  border-top: 1px rgba(255, 255, 255, 0.25) solid;
   padding-top: 1rem;
-}
+} 
